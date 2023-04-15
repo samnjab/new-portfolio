@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState, useEffect } from 'react'
+import Projects from './Components/Projects'
+import About from './Components/About'
+import './App.css'
 function App() {
+  const [mode, setMode] = useState(true)
   return (
     <div className="App">
+      <div className='transition-background'>
+
+      </div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <h1>Sam J</h1>
+        <div className='files'>
+
+        </div>
+        <button 
+        className='nav'
+        onClick={() => setMode(!mode)}
         >
-          Learn React
-        </a>
+          {
+            mode ?
+            <p>About</p>
+            :
+            <p>Projects</p>
+          }
+        </button>
       </header>
+      <section className='main'>
+        {
+          mode ?
+          <Projects />
+          :
+          <About />
+        }
+
+      </section>
     </div>
   );
 }
