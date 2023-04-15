@@ -6,7 +6,7 @@ import cover3 from '../assets/thegame.jpeg'
 import vid1 from '../assets/e3.mp4'
 import vid2 from '../assets/Acrolix.mp4'
 import vid3 from '../assets/Game.mp4'
-export default function Projects() {
+export default function Projects({ mode, setMode}) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
 
@@ -57,24 +57,64 @@ export default function Projects() {
     }
     
     return(
-        <div className='projects'>
+        <>
             {   focus.length !== 0 ?
                 projects.length !== 0 ?
-                focus.map(project => {
-                    return <ProjectC project={project} />
-                })
+                <div className='campains'>
+                    <nav>
+                        <a 
+                        className='nav'
+                        onClick={() => setMode(!mode)}
+                        >
+                            {
+                            mode ?
+                            <p>About</p>
+                            :
+                            <p>Projects</p>
+                            }
+                        </a>
+                        </nav>
+                    {     
+                    focus.map(project => {
+                        return <ProjectC project={project} />
+                    })
+                    }
+                    
+                </div>
                 :
                 <></>
                 :
-                projects.map(project => {
-                    return (
-                        <div className='img-box' onClick={() => handleFocus(project)}>
-                            <img src={project.coverSrc}></img>
+                <>
+                    <header className="App-header">
+                        <div className='wrapper'>
+                            <h1>Sam J</h1>
+                            <nav>
+                                <a 
+                                className='nav'
+                                onClick={() => setMode(!mode)}
+                                >
+                                    {
+                                    mode ?
+                                    <p>About</p>
+                                    :
+                                    <p>Projects</p>
+                                    }
+                                </a>
+                            </nav>
                         </div>
-                    )
-                })
+                    </header>
+                    <div className='projects'>
+                        { projects.map(project => {
+                            return (
+                                <div className='img-box' onClick={() => handleFocus(project)}>
+                                    <img src={project.coverSrc}></img>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </>
             }
-        </div>
+        </>
     )
 
 }

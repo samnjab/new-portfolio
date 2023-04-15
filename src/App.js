@@ -6,32 +6,13 @@ function App() {
   const [mode, setMode] = useState(true)
   return (
     <div className="App">
-      <div className='transition-background'>
-
-      </div>
-      <header className="App-header">
-        <h1>Sam J</h1>
-        <div className='files'>
-
-        </div>
-        <button 
-        className='nav'
-        onClick={() => setMode(!mode)}
-        >
-          {
-            mode ?
-            <p>About</p>
-            :
-            <p>Projects</p>
-          }
-        </button>
-      </header>
+      <div className='transition-background'></div>
       <section className='main'>
         {
           mode ?
-          <Projects />
+          <Projects mode={mode} setMode={setMode}/>
           :
-          <About />
+          <About mode={mode} setMode={setMode}/>
         }
 
       </section>

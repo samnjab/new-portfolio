@@ -14,16 +14,11 @@ export default function Project({ project }) {
                 <video autoplay='true' playsinline='' loop='true' preload="auto" title={project.title} className="videoFullBleed">
                     <source src={project.vidSrc} type="video/mp4"/>
                 </video>
-                
+                <a className='content' href={project.liveLink} target='_blank'>{project.title}</a>
+                <a className='content' href={project.github} target='_blank'>Github</a>
             </div>
-            <h2 className='title content'>{project.title}</h2>
-            <p className='description content'>{project.description}</p>
-            <button className='content'>
-                <a href={project.liveLink} target='_blank'>Website</a>
-            </button>
-            <button className='content'>
-                <a href={project.github} target='_blank'>Github</a>
-            </button>
+            {/* <p className='description content'>{project.description}</p> */}
+
         </div>
     )
 
