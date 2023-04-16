@@ -8,14 +8,14 @@ html { box-sizing: border-box;}
 
 :root{
   --primaryColorRef: #bac4b8;
-  --mixedColor1Ref: #e2e2e2;
-  --mixedColor2Ref: #c6c6c6;
-  --mixedColor3Ref: #aaa;
-  --mixedColor4Ref: #8d8d8d;
-  --mixedColor5Ref: #717171;
-  --mixedColor6Ref: #555;
+  --mixedColor1Ref: #A8B0A6;
+  --mixedColor2Ref: #838981;
+  --mixedColor3Ref: #70766F;
+  --mixedColor4Ref: #5E625D;
+  --mixedColor5Ref: #4B4F4B;
+  --mixedColor6Ref: #393B38;
   --mixedColor7Ref: #383838;
-  --mixedColor8Ref: #1c1c1c;
+  --mixedColor8Ref: #262826;
   --secondaryColorRef:#141414 ;
   --tertiaryColorRef: #E4001C;
   --secondaryColorGradientMin: rgba(0, 0, 0, 0);
@@ -42,11 +42,13 @@ html { box-sizing: border-box;}
   --errorColor: #E4001C;
 
   /* fonts */
+  --header-font: 'Bebas Neue', serif;
   --display-font: 'DM Serif Display',
-  serif;;
-  --text-font: 'Source Serif Pro',
   serif;
+  --text-font: 'Source Serif Pro',
+  'sans serif';
 }
+/* Global Styles */
 html {
   color: var(--foregroundColor);
   -moz-osx-font-smoothing: grayscale;
@@ -65,12 +67,17 @@ a:hover{
 
 nav a{
   text-decoration:underline;
+
 }
 
 ul {
   list-style: none;
 }
-h1,
+h1{
+  font-family: var(--header-font);
+  letter-spacing: 0.05px;
+  font-size: 2.5rem;
+}
 h2,
 h3,
 h4,
@@ -80,6 +87,13 @@ h5{
 }
 p{
   line-height: 2rem;
+  color:var(--foregroundColorMix1);
+}
+
+.img-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .wrapper{
   width:90%;
@@ -97,6 +111,8 @@ p{
   max-height: 100vh;
   background-color: var(--backgroundColor);
 }
+/* End of Global Styles */
+/* App styles */
 .App {
 
 }
@@ -104,15 +120,107 @@ p{
   display:flex;
   justify-content: space-between;
   align-items: center;
+  min-height:2vh;
 }
 .img-box {
   width:200px;
-  height:100px;
+  height:400px;
 }
-.img-box img{
-  max-width:100%;
-  object-fit:cover;
+h1 > span{
+  overflow: hidden;
+  letter-spacing: -.02em;
+  display: inline-block;
+  width:15px;
+  overflow: hidden;
 }
+h1 span:nth-child(3){
+    width:20px;
+}
+h1 span span{
+  letter-spacing: -.02em;
+  animation: slideLeft 500ms cubic-bezier(.25, .46, .45, .94);
+  display: inline-block;
+}
+h1 span:nth-child(1) span{
+  animation-delay: 0.0s;
+}
+h1 span:nth-child(2) span{
+  animation-delay: 0.005s;
+
+}
+h1 span:nth-child(3) span{
+  animation-delay: 0.010s;
+}
+h1 span:nth-child(4) span{
+  animation-delay: 0.015s;
+}
+nav a{
+  animation: slideUp 2s cubic-bezier(.25, .46, .45, .94);
+}
+/* App Animations */
+@keyframes slideLeft {
+  0%{
+    width:0%;
+    opacity:0.0;
+    overflow: hidden;
+  }
+  25%{
+    width:25%;
+    opacity:0.25;
+    overflow: hidden;
+
+  }
+  50%{
+    width:50%;
+    opacity:0.5;
+    overflow: hidden;
+  }
+  75%{
+    width:75%;
+    opacity:0.75;
+    overflow: hidden;
+  }
+  100%{
+    width:100%;
+    opacity:1.0;
+
+  }
+}
+@keyframes slideUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0.0;
+  }
+  25% {
+    transform: translateY(15px);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(5px);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1.0;
+  }
+}
+@keyframes slideRight {
+  0% {
+    transform: translate(100px, 0px);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1.0;
+  }
+}
+
+/* campaign styles */
 .campaign-container{
   height:100vh;
   width:100vw;
@@ -121,12 +229,19 @@ p{
   flex-direction:column;
   justify-content: center;
   align-items:center;
-
-
   position: sticky;
   top: 0px;
   background-color: rgb(36, 167, 241);
   min-height: 100vh;
+}
+.campaigns {
+  position: relative;
+}
+
+.campaigns nav {
+  position: fixed;
+  inset: 2rem 2rem auto auto;
+  z-index: 30;
 }
 .container {
   min-height:100%;
@@ -149,7 +264,6 @@ p{
   z-index:10;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .container video {
   position: absolute;
   top: 50%;
@@ -178,15 +292,41 @@ p{
   bottom:10%;
   left:0;
 }
+/* End of Campaign Styles */
+/* Project Preview Styles */
 .projects{
+  min-height:80vh;
+}
+.projects .wrapper{
   display: flex;
+  justify-content: space-around;
+
 }
-.campains{
-  position:relative;
-}
-.campains nav{
-  position:fixed;
-  inset:2rem 2rem auto auto;
-  z-index:30;
+/* End of Project Preview Styles */
+/* Footer Styles */
+footer{
+  min-height:2vh;
+  margin:1rem 0;
+  font-size: 1.1rem;
 }
 
+footer .wrapper{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p{
+  text-transform: uppercase;
+  margin:0;
+  line-height: 15px;
+  font-family: var(--header-font);
+}
+ footer .contact{
+   display:flex;
+   flex-direction: column;
+ }
+footer a{
+  line-height: 15px;
+  font-size: 0.9rem;
+}
+/* End of Footer Styles */

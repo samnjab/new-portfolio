@@ -60,7 +60,7 @@ export default function Projects({ mode, setMode}) {
         <>
             {   focus.length !== 0 ?
                 projects.length !== 0 ?
-                <div className='campains'>
+                <div className='campaigns'>
                     <nav>
                         <a 
                         className='nav'
@@ -87,7 +87,12 @@ export default function Projects({ mode, setMode}) {
                 <>
                     <header className="App-header">
                         <div className='wrapper'>
-                            <h1>Sam J</h1>
+                            <h1>
+                                <span><span>S</span></span>
+                                <span><span>a</span></span>
+                                <span><span>m</span></span>
+                                <span><span>J</span></span>
+                            </h1>
                             <nav>
                                 <a 
                                 className='nav'
@@ -104,16 +109,30 @@ export default function Projects({ mode, setMode}) {
                         </div>
                     </header>
                     <div className='projects'>
-                        { projects.map(project => {
-                            return (
-                                <div className='img-box' onClick={() => handleFocus(project)}>
-                                    <img src={project.coverSrc}></img>
-                                </div>
-                            )
-                        })}
+                        <div className='wrapper'>
+                            { projects.map(project => {
+                                return (
+                                    <div className='img-box' onClick={() => handleFocus(project)}>
+                                        <img src={project.coverSrc}></img>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
                 </>
             }
+            <footer>
+                <div className='wrapper'>
+                    <div className='intro'>
+                        <p>Developer</p>
+                        <p>Available Apr.2023</p>
+                    </div>
+                    <div className='contact'>
+                        <a href=''>Github</a>
+                        <a href=''>LinkedIn</a>
+                    </div>
+                </div>
+            </footer>
         </>
     )
 

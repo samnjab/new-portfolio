@@ -3,7 +3,7 @@ export default function About({mode, setMode}) {
         <div className='about'>
            <header className="App-header">
                 <div className='wrapper'>
-                    <h1>Sam J</h1>
+                    <h1>SamJ</h1>
                     <nav>
                         <a 
                         className='nav'
