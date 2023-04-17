@@ -73,7 +73,7 @@ export default function Projects({ mode, setMode}) {
                             <p>Projects</p>
                             }
                         </a>
-                        </nav>
+                    </nav>
                     {     
                     focus.map(project => {
                         return <ProjectC project={project} />
@@ -112,8 +112,10 @@ export default function Projects({ mode, setMode}) {
                         <div className='wrapper'>
                             { projects.map(project => {
                                 return (
-                                    <div className='img-box' onClick={() => handleFocus(project)}>
-                                        <img src={project.coverSrc}></img>
+                                    <div className='projectContainer'>
+                                        <div className='img-box' onClick={() => handleFocus(project)}>
+                                            <img src={project.coverSrc}></img>
+                                        </div>
                                     </div>
                                 )
                             })}

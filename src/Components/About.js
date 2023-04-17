@@ -3,7 +3,12 @@ export default function About({mode, setMode}) {
         <div className='about'>
            <header className="App-header">
                 <div className='wrapper'>
-                    <h1>SamJ</h1>
+                    <h1>
+                        <span><span>S</span></span>
+                        <span><span>a</span></span>
+                        <span><span>m</span></span>
+                        <span><span>J</span></span>
+                    </h1>
                     <nav>
                         <a 
                         className='nav'

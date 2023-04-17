@@ -120,12 +120,20 @@ p{
   display:flex;
   justify-content: space-between;
   align-items: center;
-  min-height:2vh;
+  height:15vh;
 }
-.img-box {
+.projectContainer{
   width:200px;
   height:400px;
+  margin:0 0.7rem;
+  transform: translateX(2rem);
+  animation: slideLeft 500ms cubic-bezier(.25, .46, .45, .94);
 }
+.img-box {
+  width:100%;
+  height:100%;
+}
+
 h1 > span{
   overflow: hidden;
   letter-spacing: -.02em;
@@ -138,7 +146,7 @@ h1 span:nth-child(3){
 }
 h1 span span{
   letter-spacing: -.02em;
-  animation: slideLeft 500ms cubic-bezier(.25, .46, .45, .94);
+  animation: slideRight 500ms cubic-bezier(.25, .46, .45, .94);
   display: inline-block;
 }
 h1 span:nth-child(1) span{
@@ -154,11 +162,29 @@ h1 span:nth-child(3) span{
 h1 span:nth-child(4) span{
   animation-delay: 0.015s;
 }
+nav{
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 nav a{
-  animation: slideUp 2s cubic-bezier(.25, .46, .45, .94);
+  display: inline-block;
+  height:2rem;
+  margin:auto;
+}
+nav a p{
+  margin:auto;
+  animation: slideUp 500ms cubic-bezier(.25, .46, .45, .94);
+  height:100%;
+  overflow: hidden;
+}
+.projectContainer .img-box{
+  /* animation: fadeLeft 500ms cubic-bezier(.25, .46, .45, .94); */
+  /* transform: translateX(20rem); */
 }
 /* App Animations */
-@keyframes slideLeft {
+@keyframes slideRight {
   0%{
     width:0%;
     opacity:0.0;
@@ -181,44 +207,96 @@ nav a{
     overflow: hidden;
   }
   100%{
-    width:100%;
+    width:10%;
     opacity:1.0;
 
   }
 }
 @keyframes slideUp {
   0% {
-    transform: translateY(100px);
+    transform: translateY(3rem);
+    height: 30%;
     opacity: 0.0;
+    overflow: hidden;
   }
   25% {
-    transform: translateY(15px);
+    transform: translateY(1.5rem);
+    height: 40%;
     opacity: 0.25;
+    overflow: hidden;
   }
   50% {
-    transform: translateY(10px);
+    transform: translateY(1rem);
+    height: 50%;
     opacity: 0.5;
+    overflow: hidden;
   }
   75% {
-    transform: translateY(5px);
+    transform: translateY(0.5rem);
+    height: 60%;
     opacity: 0.75;
+    overflow: hidden;
   }
   100% {
-    transform: translateY(0px);
+    transform: translateY(0rem);
+    height: 100%;
+    opacity: 1.0;
+  
+  }
+}
+@keyframes fadeLeft {
+  0% {
+    width: 0%;
+    opacity: 0.0;
+    overflow: hidden;
+  }
+  25% {
+    width: 25%;
+    opacity: 0.25;
+    overflow: hidden;
+  }
+  50% {
+    width: 50%;
+    opacity: 0.5;
+    overflow: hidden;
+  }
+  75% {
+    width: 75%;
+    opacity: 0.75;
+    overflow: hidden;
+  }
+  100% {
+    width: 10%;
     opacity: 1.0;
   }
 }
-@keyframes slideRight {
+@keyframes slideLeft {
   0% {
-    transform: translate(100px, 0px);
+    transform: translateX(20rem);
+    opacity: 0.0;
+  }
+
+  25% {
+    transform: translateX(16rem);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: translateX(14rem);
     opacity: 0.5;
   }
 
+  75% {
+    transform: translateX(12rem);
+    opacity: 0.75;
+  }
+
   100% {
-    transform: translate(0px, 0px);
+    transform: translateX(2rem);
     opacity: 1.0;
   }
 }
+
 
 /* campaign styles */
 .campaign-container{
@@ -296,11 +374,10 @@ nav a{
 /* Project Preview Styles */
 .projects{
   min-height:80vh;
+  overflow-x: scroll;
 }
 .projects .wrapper{
   display: flex;
-  justify-content: space-around;
-
 }
 /* End of Project Preview Styles */
 /* Footer Styles */
