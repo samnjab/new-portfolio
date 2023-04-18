@@ -7,11 +7,10 @@ export default function Project({ project }) {
         script.async = true
         document.body.appendChild(script)
     }, [])
-    console.log('project vid scr', project.vidSrc)
     return(
         <div className='campaign-container'>
             <div className='container'>
-                <video autoplay='true' playsinline='' loop='true' preload="auto" title={project.title} className="videoFullBleed">
+                <video autoPlay={true} playsinline={false} loop={true} preload="auto" title={project.title} className="videoFullBleed">
                     <source src={project.vidSrc} type="video/mp4"/>
                 </video>
                 <a className='content' href={project.liveLink} target='_blank'>{project.title}</a>
