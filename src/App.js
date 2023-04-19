@@ -81,6 +81,23 @@ function App() {
                 <About mode={mode} setMode={setMode}/>
               }
             </section>
+            {
+              campaignMode ? 
+              <></>
+              :
+              <footer>
+                  <div className='wrapper'>
+                      <div className='intro'>
+                          <p>Developer</p>
+                          <p>Available Apr.2023</p>
+                      </div>
+                      <div className='contact'>
+                          <a href=''>Github</a>
+                          <a href=''>LinkedIn</a>
+                      </div>
+                  </div>
+              </footer>
+            }
           </>
       }
       

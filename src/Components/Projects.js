@@ -9,6 +9,7 @@ import vid3 from '../assets/Game.mp4'
 export default function Projects({ campaignMode, setCampaignMode }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
+    const [x, setX] = useState(0)
 
     class Project{
         constructor(title, description, liveLink, github, vidSrc, coverSrc){
@@ -45,6 +46,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                 return project
             })
         )
+        console.log('campaign mode on launch', campaignMode)
 
 
     },[])
@@ -55,8 +57,14 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         }
         setFocus(order)
     }
+    useEffect(() => {
+        if (focus.length === 0) return
+        console.log('setting focus') 
+        setCampaignMode(true)
+    }, [focus])
     // Track Scroll Logic
     useEffect(() => {
+        if (campaignMode) return
         const track = document.getElementById('projectTrack')
         window.onmousedown = e => {
             track.dataset.mouseDownAt = e.clientX
@@ -84,17 +92,12 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         }
 
         const section = document.querySelector('.projects')
-        console.log(section)
-        console.log(section.offsetWidth)
         section.onscroll = (e) => {
-            console.log(e.target.scrollLeft)
             const scrollDelta = parseFloat(track.dataset.prevScroll) - e.target.scrollLeft
             const maxScrollDelta = window.innerWidth / 2 
             const percentage = 2 * (scrollDelta / maxScrollDelta) * 100
             const nextPercentageUnconstrained = parseFloat(track.dataset.percentScroll) + percentage
             const nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100)
-            console.log('next percent is', nextPercentage)
-            console.log('max scroll', maxScrollDelta)
             track.dataset.percentScroll = nextPercentage
             track.dataset.prevScroll = e.target.scrollLeft 
             track.animate({
@@ -105,15 +108,24 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                 objectPosition: `${(100 + nextPercentage)}% center`
                 }, { duration: 1200, fill: "forwards" });
             }
-
     }
-
-    },[])
-    
+    },[campaignMode])
+    useEffect(() => {
+        if (!campaignMode) return
+        const campaigns = document.querySelector('.campaigns')
+        campaigns.scrollLeft += (campaigns.scrollWidth - document.body.clientWidth) / 2
+        campaigns.onscroll = () => {
+            setX(campaigns.scrollLeft)
+        }
+    }, [campaignMode])
+    useEffect(() => {
+        if (x === 0) return
+        setCampaignMode(false)
+    }, [x])
     
     return(
         <>
-            {   focus.length !== 0 ?
+            {   focus.length !== 0 && campaignMode ?
                 projects.length !== 0 ?
                 <div className='campaigns'>
                     {     
@@ -127,6 +139,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                 :
                 <>
                     <div className='projects'>
+                        {console.log('campaign mode', campaignMode)}
                         <div id='expand'><p>+</p></div>
                         <div id='projectTrack' data-mouse-down-at='0' data-prev-percentage='0' data-prev-scroll='0' data-percent-scroll='0'>
                             { projects.map(project => {
@@ -134,7 +147,6 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                                     <div className='projectContainer'>
                                         <div className='img-box' onClick={() => {
                                             handleFocus(project)
-                                            setCampaignMode(true)
                                             }}>
                                             {/* <div className='overlay'></div> */}
                                             <img src={project.coverSrc} className='image' draggable='false'></img>
@@ -146,18 +158,6 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                     </div>
                 </>
             }
-            <footer>
-                <div className='wrapper'>
-                    <div className='intro'>
-                        <p>Developer</p>
-                        <p>Available Apr.2023</p>
-                    </div>
-                    <div className='contact'>
-                        <a href=''>Github</a>
-                        <a href=''>LinkedIn</a>
-                    </div>
-                </div>
-            </footer>
         </>
     )
 
