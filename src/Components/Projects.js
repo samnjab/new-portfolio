@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import ProjectC from './Project'
+import Campaign from './Project'
 import cover1 from '../assets/euphonia.jpg'
 import cover2 from '../assets/typewriter.jpeg'
 import cover3 from '../assets/thegame.jpeg'
 import vid1 from '../assets/e3.mp4'
 import vid2 from '../assets/Acrolix.mp4'
 import vid3 from '../assets/Game.mp4'
-export default function Projects({ mode, setMode}) {
+export default function Projects({ campaignMode, setCampaignMode }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
 
@@ -116,60 +116,26 @@ export default function Projects({ mode, setMode}) {
             {   focus.length !== 0 ?
                 projects.length !== 0 ?
                 <div className='campaigns'>
-                    <nav>
-                        <a 
-                        className='nav'
-                        onClick={() => setMode(!mode)}
-                        >
-                            {
-                            mode ?
-                            <p>About</p>
-                            :
-                            <p>Projects</p>
-                            }
-                        </a>
-                    </nav>
                     {     
                     focus.map(project => {
-                        return <ProjectC project={project} />
+                        return <Campaign project={project} />
                     })
                     }
-                    
                 </div>
                 :
                 <></>
                 :
                 <>
-                    <header className="App-header">
-                        <div className='wrapper'>
-                            <h1>
-                                <span><span>S</span></span>
-                                <span><span>a</span></span>
-                                <span><span>m</span></span>
-                                <span><span>J</span></span>
-                            </h1>
-                            <nav>
-                                <a 
-                                className='nav'
-                                onClick={() => setMode(!mode)}
-                                >
-                                    {
-                                    mode ?
-                                    <p>About</p>
-                                    :
-                                    <p>Projects</p>
-                                    }
-                                </a>
-                            </nav>
-                        </div>
-                    </header>
                     <div className='projects'>
                         <div id='expand'><p>+</p></div>
                         <div id='projectTrack' data-mouse-down-at='0' data-prev-percentage='0' data-prev-scroll='0' data-percent-scroll='0'>
                             { projects.map(project => {
                                 return (
                                     <div className='projectContainer'>
-                                        <div className='img-box' onClick={() => handleFocus(project)}>
+                                        <div className='img-box' onClick={() => {
+                                            handleFocus(project)
+                                            setCampaignMode(true)
+                                            }}>
                                             {/* <div className='overlay'></div> */}
                                             <img src={project.coverSrc} className='image' draggable='false'></img>
                                         </div>

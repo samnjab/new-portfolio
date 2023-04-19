@@ -8,6 +8,7 @@ html { box-sizing: border-box;}
 
 :root{
   --primaryColorRef: #bac4b8;
+  --lightBackground:#DFE3DE;
   --mixedColor1Ref: #A8B0A6;
   --mixedColor2Ref: #838981;
   --mixedColor3Ref: #70766F;
@@ -18,6 +19,7 @@ html { box-sizing: border-box;}
   --mixedColor8Ref: #262826;
   --secondaryColorRef:#141414 ;
   --tertiaryColorRef: #E4001C;
+  --hightlightColorRef2:#EDD396;
   --secondaryColorGradientMin: rgba(0, 0, 0, 0);
   --secondaryColorGradientMax: rgba(0, 0, 0, 100);
   --primaryColorGradientMin: rgba(255, 255, 255, 0);
@@ -25,6 +27,7 @@ html { box-sizing: border-box;}
   --overlayBackgroundColor: var(--mixedColor8Ref);
   --overlayGradientMin: rgba(0, 0, 0, 0);
   --overlayGradientMax: rgba(0, 0, 0, 100);
+  /* dark theme */
   --foregroundColor: var(--primaryColorRef);
   --foregroundColorMix1: var(--mixedColor1Ref);
   --foregroundColorMix2: var(--mixedColor2Ref);
@@ -39,14 +42,33 @@ html { box-sizing: border-box;}
   --backgroundGradientColorMax: var(--secondaryColorGradientMax);
   --borderColor: var(--mixedColor7Ref);
   --highlightColor: var(--tertiaryColorRef);
+  --highlightColor2:var(--hightlightColorRef2);
   --errorColor: #E4001C;
-
   /* fonts */
   --header-font: 'Bebas Neue', serif;
   --display-font: 'DM Serif Display',
   serif;
   --text-font: 'Source Serif Pro',
   'sans serif';
+}
+/* Light theme */
+.light{
+  --foregroundColor: var(--secondaryColorRef);
+  --foregroundColorMix1: var(--mixedColor8Ref);
+  --foregroundColorMix2: var(--mixedColor7Ref);
+  --foregroundColorMix3: var(--mixedColor6Ref);
+  --foregroundColorMix4: var(--mixedColor5Ref);
+  --foregroundColorMix5: var(--mixedColor4Ref);
+  --foregroundColorMix6: var(--mixedColor3Ref);
+  --foregroundColorMix7: var(--mixedColor2Ref);
+  --foregroundColorMix8: var(--mixedColor1Ref);
+  --backgroundColor: var(--lightBackground);
+  --backgroundGradientColorMin: var(--secondaryColorGradientMin);
+  --backgroundGradientColorMax: var(--secondaryColorGradientMax);
+  --borderColor: var(--mixedColor2Ref);
+  --highlightColor: var(--tertiaryColorRef);
+  --highlightColor2:var(--hightlightColorRef2);
+  --errorColor: #E4001C;
 }
 /* Global Styles */
 html {
@@ -73,8 +95,46 @@ nav a{
 ul {
   list-style: none;
 }
+input,
+textarea,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+}
+input:focus,
+form:focus,
+textarea:focus{
+  outline: none;
+}
+button {
+  display: inline-block;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background-color: transparent;
+  color:var(--foregroundColor);
+  opacity:0.5;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out,
+    transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: opacity 0.3s ease-in-out;
+}
+button:hover{
+  opacity:1;
+}
+fieldset {
+  border: none;
+}
 h1{
   font-family: var(--header-font);
+  color:var(--foregroundColor);
   letter-spacing: 0.05px;
   font-size: 2.5rem;
 }
@@ -83,6 +143,7 @@ h3,
 h4,
 h5{
   font-family: var(--display-font);
+  color:var(--foregroundColor);
   font-style: italic;
 }
 p{
@@ -116,6 +177,71 @@ p{
   background-color: var(--backgroundColor);
 }
 /* End of Global Styles */
+/* Toggle Theme Styles */
+.theme{
+  width:2rem;
+  height:2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 10px;
+}
+.darkTheme{
+  width:100%;
+  height:100%;
+  position:relative;
+  padding:0;
+  margin:0;
+  opacity:0.9;
+}
+.lightTheme {
+  position:relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity:0.9;
+}
+.moon{
+  background-color: var(--foregroundColor);
+  border-radius: 50%;
+  width:50%;
+  height:50%;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset -4px 2px 6px var(--backgroundColor);
+  animation: moon 500ms cubic-bezier(.25, .46, .45, .94);
+}
+
+@keyframes moon {
+  0%{
+    box-shadow: inset 0px 0px 0px var(--backgroundColor);
+  }
+}
+.theSun {
+  opacity: 1;
+  box-shadow: 0px 0px 8px 2px var(--lightBackground);
+  background-color: var(--lightBackground);
+  width:50%;
+  height:50%;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  animation: sunpulse 2s alternate infinite;
+  border-radius: 50%;
+  background-image: radial-gradient(circle, var(--lightBackground), var(--foregroundColor));
+}
+@keyframes sunpulse {
+  from {
+    box-shadow: 0 0 0px var(--lightBackground), 0px 0px 8px 2px var(--lightBackground);
+  }
+  to {
+    box-shadow: 0 0 5px var(--lightBackground), 0 0 15px var(--lightBackground);
+  }
+}
 /* App styles */
 .App {
 
@@ -133,6 +259,10 @@ p{
   align-items: center;
   height:15vh;
 }
+.campaignHeader{
+  display: none;
+}
+
 h1 > span{
   overflow: hidden;
   letter-spacing: -.02em;
@@ -434,6 +564,75 @@ nav a p{
 }
 .aboutMain{
   flex-basis:55%;
+}
+.contact p{
+  font-style:italic;
+  font-weight:100;
+  font-size:0.9rem;
+
+}
+/* Form Styles */
+fieldset {
+  padding: 0;
+}
+fieldset form{
+  border: var(--borderColor) solid 1px;
+  background-color: var(--backgroundColor);
+  padding: 2rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+}
+form input {
+  background-color: var(--backgroundColor);
+  color: var(--foregroundColorMix1);
+  border-bottom: var(--borderColor) 1px solid;
+  margin: 10px 5px 10px 5px;
+  padding: 0.5rem;
+  font-size: 14px;
+  width: 100%;
+}
+form input::placeholder{
+  color: var(--foregroundColorMix2);
+  font-size: 14px;
+  line-height: 30px;
+}
+form input:focus,
+form input:hover{
+  background-color: var(--foregroundColorMix8);
+}
+form textarea{
+  border-bottom:var(--borderColor) 1px solid;
+  background-color: var(--backgroundColor);
+  color: var(--foregroundColorMix1);
+  margin: 10px 5px 10px 5px;
+  padding: 0.5rem;
+  font-size: 14px;
+  width: 100%;
+  flex-basis:100%;
+  min-width:100px;
+  max-width:790px;
+}
+form textarea::placeholder{
+  color: var(--foregroundColorMix2);
+  font-size: 14px;
+  line-height: 30px;
+}
+form textarea:hover,
+form textarea:focus{
+  background-color: var(--foregroundColorMix8);
+}
+.shadowForm input,
+.shadowForm textarea,
+.shadowForm button,
+.shadowForm input::placeholder,
+.shadowForm textarea::placeholder{
+  font-size: 0.5rem;
+  padding:5px;
+}
+.shadowForm{
+  padding:0.5rem;
 }
 /* End of About Page Styles */
 /* Footer Styles */
