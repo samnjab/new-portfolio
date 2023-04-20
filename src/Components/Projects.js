@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Campaign from './Project'
 import cover1 from '../assets/euphonia.jpg'
 import cover2 from '../assets/typewriter.jpeg'
@@ -10,6 +10,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
     const [x, setX] = useState(0)
+    const xRef = useRef(0)
 
     class Project{
         constructor(title, description, liveLink, github, vidSrc, coverSrc){
@@ -64,7 +65,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     }, [focus])
     // Track Scroll Logic
     useEffect(() => {
-        if (campaignMode) return
+        if (focus.length !== 0 && campaignMode) return
         const track = document.getElementById('projectTrack')
         window.onmousedown = e => {
             track.dataset.mouseDownAt = e.clientX
@@ -111,21 +112,23 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     }
     },[campaignMode])
     useEffect(() => {
-        if (!campaignMode) return
+        if (focus.length === 0 && !campaignMode) return
         const campaigns = document.querySelector('.campaigns')
         campaigns.scrollLeft += (campaigns.scrollWidth - document.body.clientWidth) / 2
+        xRef.current = campaigns.scrollLeft
         campaigns.onscroll = () => {
             setX(campaigns.scrollLeft)
         }
     }, [campaignMode])
     useEffect(() => {
-        if (x === 0) return
+        if (x - xRef.current === 0) return
         setCampaignMode(false)
+        setFocus([])
     }, [x])
     
     return(
         <>
-            {   focus.length !== 0 && campaignMode ?
+            {   focus.length !== 0 ?
                 projects.length !== 0 ?
                 <div className='campaigns'>
                     {     
@@ -139,7 +142,6 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                 :
                 <>
                     <div className='projects'>
-                        {console.log('campaign mode', campaignMode)}
                         <div id='expand'><p>+</p></div>
                         <div id='projectTrack' data-mouse-down-at='0' data-prev-percentage='0' data-prev-scroll='0' data-percent-scroll='0'>
                             { projects.map(project => {
