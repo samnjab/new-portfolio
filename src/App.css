@@ -53,12 +53,12 @@ html { box-sizing: border-box;}
 }
 /* Light theme */
 .light{
-  --foregroundColor: var(--secondaryColorRef);
-  --foregroundColorMix1: var(--mixedColor8Ref);
-  --foregroundColorMix2: var(--mixedColor7Ref);
-  --foregroundColorMix3: var(--mixedColor6Ref);
-  --foregroundColorMix4: var(--mixedColor5Ref);
-  --foregroundColorMix5: var(--mixedColor4Ref);
+  --foregroundColor: var(--mixedColor8Ref);
+  --foregroundColorMix1: var(--mixedColor7Ref);
+  --foregroundColorMix2: var(--mixedColor6Ref);
+  --foregroundColorMix3: var(--mixedColor5Ref);
+  --foregroundColorMix4: var(--mixedColor4Ref);
+  --foregroundColorMix5: var(--mixedColor3Ref);
   --foregroundColorMix6: var(--mixedColor3Ref);
   --foregroundColorMix7: var(--mixedColor2Ref);
   --foregroundColorMix8: var(--mixedColor1Ref);
@@ -252,21 +252,24 @@ p{
   }
 }
 /* App styles */
-.App {
+.App-header {
+  height:15vh;
 
 }
 .main{
   position: relative;
-  height: 100vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+}
+.campaignMain{
+  height: 100vh;
 }
 .App-header .wrapper{
   display:flex;
   justify-content: space-between;
   align-items: center;
-  height:15vh;
 }
 .campaignHeader{
   display: none;
