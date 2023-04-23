@@ -14,6 +14,8 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     const [focus, setFocus] = useState([])
     const [x, setX] = useState(0)
     const xRef = useRef(0)
+    const [fullview,setFullView] = useState()
+
 
     class Project{
         constructor(title, description, liveLink, github, vidSrc, coverSrc, bwCover){
@@ -129,22 +131,19 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     }, [x])
 
     const expand = (project) => {
-        setTimeout(() => {
-            const container = document.querySelectorAll('.projectContainer')[projects.indexOf(project)]
-            container.animate({
-                width:'80vw',
-                height:'400px'
-            },{duration: 500, fill:'forwards'})
-        }, 500)
+        const container = document.querySelectorAll('.projectContainer')[projects.indexOf(project)]
+        container.animate({
+            width:'80vw',
+            
+        },{duration: 500, fill:'forwards'})
+        setFullView(project)
     }
     const minimize = (project) => {
-        setTimeout(() => {
-            const container = document.querySelectorAll('.projectContainer')[projects.indexOf(project)]
-            container.animate({
-                width:'200px',
-                height:'400px'
-            },{duration: 400, fill:'forwards'})
-        }, 500)
+        const container = document.querySelectorAll('.projectContainer')[projects.indexOf(project)]
+        container.animate({
+            width:'200px',
+        },{duration: 400, fill:'forwards'})
+        setFullView()
     }
     return(
         <>
@@ -168,14 +167,18 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                                 return (
                                     <div 
                                     className='projectContainer' 
-                                    onMouseEnter={() => expand(project)}
-                                    onMouseLeave={() => minimize(project)}
+                                    onMouseOverCapture={() => expand(project)}
+                                    onMouseOutCapture={() => minimize(project)}
                                     >
                                         <div className='img-box' onClick={() => {
                                             handleFocus(project)
                                             }}>
-                                            {/* <div className='overlay'></div> */}
-                                            <img src={project.bwCover} className='image' draggable='false'></img>
+                                            {
+                                                project === fullview ?
+                                                <img src={project.coverSrc}></img>
+                                                :
+                                                <img src={project.bwCover} className='image' draggable='false'></img>
+                                            }
                                         </div>
                                     </div>
                                 )
