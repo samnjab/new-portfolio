@@ -183,7 +183,7 @@ p{
   align-items: center;
   transition: 400ms cubic-bezier(.25, .46, .45, .94);
 }
-.bwCOver.window{
+.bwCover.window{
   width:200px;
 }
 .rgbCover.window{
@@ -626,7 +626,7 @@ nav a p{
   left:50%;
   top:50%;
   transform: translate(0%, -50%);
-  min-width:150vw;
+  min-width:320vw;
   height:100%;
 }
 .projectContainer {

@@ -134,16 +134,22 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     }, [x])
     useEffect(() => {
         if (campaignMode || !fullview) return
-        const projectTrack = document.querySelector('.projects')
-        const index = projects.indexOf(fullview) + 1 
+        const projectDiv = document.querySelector('.projects')
+        const projectTrack = document.getElementById('projectTrack')
+        const index = projects.indexOf(fullview)
         console.log('index is', index)
-        projectTrack.scrollLeft = (projectTrack.scrollWidth - document.body.clientWidth) / 2 
-        console.log('track scroll left', projectTrack.scrollLeft )
-        trackXRef.current = projectTrack.scrollLeft
-        projectTrack.onscroll = () => {
+        console.log('dataset scroll', projectTrack.dataset.percentScroll)
+        projectTrack.animate({
+                transform: `translate(${-1 * projectTrack.dataset.percentScroll}, -50%)`
+            }, { duration: 0 , fill: "forwards" })
+        projectDiv.scrollLeft =  0.5 * document.body.clientWidth - 0.14 * document.body.clientWidth + index * (document.body.clientWidth - 0.14 * document.body.clientWidth)
+        // console.log('scroll width', (projectTrack.scrollWidth - document.body.clientWidth) / 2)
+        console.log('scroll left is ', projectDiv.scrollLeft)
+        trackXRef.current = projectDiv.scrollLeft
+        projectDiv.onscroll = () => {
             console.log('onscroll firing')
-            setTrackPosition(projectTrack.scrollLeft)
-            projectTrack.scrollLeft = trackXRef.current
+            setTrackPosition(projectDiv.scrollLeft)
+            projectDiv.scrollLeft = trackXRef.current
         }
     }, [fullview])
     useEffect(() => {
@@ -168,13 +174,17 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         // },{duration: 500, fill:'forwards'})
         setFullView(project)
     }
-    const minimize = (project) => {
-        const container = document.querySelectorAll('.projectContainer')[projects.indexOf(project)]
-        // container.animate({
-        //     width:'200px',
-        // },{duration: 400, fill:'forwards'})
-        setFullView()
-    }
+    // useEffect(() => {
+    //     const projectTrack = document.querySelector('.projects')
+    //     projectTrack.onscroll = () => {
+    //         console.log('scroll width', projectTrack.scrollWidth)
+    //         console.log('width is', projectTrack.offsetWidth)
+    //         projectTrack.scrollLeft = 0.5 * document.body.clientWidth - 0.12 * document.body.clientWidth + document.body.clientWidth - 0.12 *  document.body.clientWidth +  document.body.clientWidth - 0.12 * document.body.clientWidth
+    //         console.log('scroll left', projectTrack.scrollLeft)
+    //     }
+
+    // }, [])
+
     return(
         <>
             {   focus.length !== 0 ?
