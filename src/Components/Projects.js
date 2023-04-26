@@ -116,7 +116,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                 }, { duration: 1200, fill: "forwards" });
             }
     }
-    },[campaignMode])
+    },[campaignMode, fullview])
     useEffect(() => {
         if (focus.length === 0 && !campaignMode) return
         const campaigns = document.querySelector('.campaigns')
@@ -125,25 +125,39 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         campaigns.onscroll = () => {
             setX(campaigns.scrollLeft)
         }
-    }, [campaignMode])
+    }, [campaignMode, fullview])
     useEffect(() => {
         if (x - xRef.current === 0) return
         setCampaignMode(false)
         setFocus([])
+        setFullView()
     }, [x])
     useEffect(() => {
         if (campaignMode || !fullview) return
         const projectTrack = document.querySelector('.projects')
-        projectTrack.scrollLeft += (projectTrack.scrollWidth - document.body.clientWidth) / 2
+        const index = projects.indexOf(fullview) + 1 
+        console.log('index is', index)
+        projectTrack.scrollLeft = (projectTrack.scrollWidth - document.body.clientWidth) / 2 
         console.log('track scroll left', projectTrack.scrollLeft )
         trackXRef.current = projectTrack.scrollLeft
         projectTrack.onscroll = () => {
+            console.log('onscroll firing')
             setTrackPosition(projectTrack.scrollLeft)
+            projectTrack.scrollLeft = trackXRef.current
         }
     }, [fullview])
     useEffect(() => {
+        if (trackPosition === 0) return
         if (Math.abs(trackPosition - trackXRef.current) < 5 ) return
+        console.log('>2')
         setFullView()
+        const projectTrack = document.querySelector('.projects')
+        projectTrack.scrollLeft = 0
+        projectTrack.onscroll = () => {
+            console.log('2nd onscroll firing')
+            projectTrack.scrollLeft = 0
+        }
+        console.log('project track onscroll', projectTrack.onscroll)
     }, [trackPosition])
 
     const expand = (project) => {
@@ -181,42 +195,44 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                         <div id='projectTrack' data-mouse-down-at='0' data-prev-percentage='0' data-prev-scroll='0' data-percent-scroll='0'>
                             { projects.map(project => {
                                 return (
-                                    <div 
-                                    className={`projectContainer ${fullview === project ? 'rgbCover' : 'bwCover'}`} 
-                                    >
-                                        <div className='projectTitle'>
-                                            {
-                                                [...project.title].map(letter => {
-                                                    return(
-                                                        <h3 style = {{color:project.titleColors[Math.floor(Math.random() * project.titleColors.length)]}} className={`${fullview === project ? '' : 'hide'}`}>{letter}</h3>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                        <div className='img-box'>
-                                                <img 
-                                                src={project.coverSrc} 
-                                                className={`image ${fullview === project ? '' : 'hide'}`} 
-                                                draggable='false'
-                                                onClick={() => {
-                                                handleFocus(project)
-                                                }}
-                                                ></img>
-                                                <div 
-                                                className={`exploreTag ${fullview === project ? '' : 'hide'}`}
-                                                onClick={() => {
-                                                handleFocus(project)
-                                                }}
-                                                >
-                                                    <p>Explore</p>
-                                                    <p>+</p>
-                                                </div>
-                                                <img 
-                                                src={project.bwCover} 
-                                                className={`image ${fullview !== project ? '' : 'hide'}`} 
-                                                draggable='false'
-                                                onClick={() => expand(project)}
-                                                ></img>
+                                    <div className={`window ${fullview === project ? 'rgbCover' : fullview ? 'fadedCover' :'bwCover'}`}>
+                                        <div 
+                                        className={`projectContainer ${fullview === project ? 'rgbCover' : fullview ? 'fadedCover' :'bwCover'}`} 
+                                        >
+                                            <div className={`projectTitle ${fullview === project ? '' : 'hide'}`}>
+                                                {
+                                                    [...project.title].map(letter => {
+                                                        return(
+                                                            <h3 style = {{color:project.titleColors[Math.floor(Math.random() * project.titleColors.length)]}} >{letter}</h3>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                            <div className='img-box'>
+                                                    <img 
+                                                    src={project.coverSrc} 
+                                                    className={`image ${fullview === project ? '' : 'hide'}`} 
+                                                    draggable='false'
+                                                    onClick={() => {
+                                                    handleFocus(project)
+                                                    }}
+                                                    ></img>
+                                                    <div 
+                                                    className={`exploreTag ${fullview === project ? '' : 'hide'}`}
+                                                    onClick={() => {
+                                                    handleFocus(project)
+                                                    }}
+                                                    >
+                                                        <p>Explore</p>
+                                                        <p>+</p>
+                                                    </div>
+                                                    <img 
+                                                    src={project.bwCover} 
+                                                    className={`image ${fullview !== project ? '' : 'hide'}`} 
+                                                    draggable='false'
+                                                    onClick={() => expand(project)}
+                                                    ></img>
+                                            </div>
                                         </div>
                                     </div>
                                 )
