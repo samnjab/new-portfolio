@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Campaign from './Project'
-import cover1 from '../assets/euphonia.jpg'
+import cover1 from '../assets/euphonia.JPG'
 import cover2 from '../assets/typewriter.JPG'
 import cover3 from '../assets/thegame.jpeg'
 import cover4 from '../assets/portfolio.JPG'
@@ -31,6 +31,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
             this.coverSrc = coverSrc
             this.bwCover = bwCover
             this.titleColors = titleColors
+            this.id = idGenerator(10)
         }
     }
     useEffect(() => {
@@ -171,10 +172,11 @@ export default function Projects({ campaignMode, setCampaignMode }) {
 
     const expand = (project) => {
         const container = document.querySelectorAll('.projectContainer')[projects.indexOf(project)]
-        // container.animate({
-        //     width:'80vw',
-            
-        // },{duration: 500, fill:'forwards'})
+        const titleDiv = container.querySelector('.projectTitle')
+        titleDiv.animate({
+            transform: `translate(${0}%, -50%)`
+        }, { duration: 1200, fill: "forwards" })
+       
         setFullView(project)
     }
     // useEffect(() => {
@@ -187,6 +189,17 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     //     }
 
     // }, [])
+    const idGenerator = (length) => {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+        }
+        return result;
+    }
 
     return(
         <>
@@ -208,7 +221,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                         <div id='projectTrack' className={`${fullview ? 'expanded' : ''}`} data-mouse-down-at='0' data-prev-percentage='0' data-prev-scroll='0' data-percent-scroll='0'>
                             { projects.map(project => {
                                 return (
-                                    <div className={`window ${fullview === project ? 'rgbCover' : fullview ? 'fadedCover' :'bwCover'}`}>
+                                    <div className={`window ${fullview === project ? 'rgbCover' : fullview ? 'fadedCover' :'bwCover'}`} id={project.id} key={project.id}>
                                         <div 
                                         className={`projectContainer ${fullview === project ? 'rgbCover' : fullview ? 'fadedCover' :'bwCover'}`} 
                                         >
