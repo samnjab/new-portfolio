@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
 import Campaign from './Project'
 import cover1 from '../assets/euphonia.jpg'
-import cover2 from '../assets/typewriter.jpeg'
+import cover2 from '../assets/typewriter.JPG'
 import cover3 from '../assets/thegame.jpeg'
+import cover4 from '../assets/portfolio.JPG'
 import vid1 from '../assets/e3.mp4'
 import vid2 from '../assets/Acrolix.mp4'
 import vid3 from '../assets/Game.mp4'
+import vid4 from '../assets/portfolio.mp4'
 import bwCover1 from '../assets/euphonia2.JPG'
 import bwCover2 from '../assets/typewriter2.JPG'
 import bwCover3 from '../assets/thegame2.JPG'
+import bwCover4 from '../assets/portfolio2.JPG'
 export default function Projects({ campaignMode, setCampaignMode }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
@@ -31,26 +34,28 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         }
     }
     useEffect(() => {
-        const titles = ['Euphonia', 'Acrolix', 'The Game']
+        const titles = ['Euphonia', 'Acrolix', 'The Game', "Sam's Portfolio"]
         const descriptions = [
             "Do you like the sweet sound of synthesizers? Does electronic music make your heart sing? Are you in love? Are you heartbroken? Checkout Euphonia. Find your next favourite tune.",
             "Whether you're looking for a catchy name for your business, a memorable slogan for your brand, or just a fun way to play with words, Acrolix is the perfect tool. With a sleek interface, you can start generating creative backronyms in just a few taps.",
-            'Come watch The Game with us.',
+            'Come watch The Game with us.', ''
         ]
         const liveLinks =[
             'https://euphonia3.vercel.app/',
             'https://acrolix.netlify.app/',
-            'thegame101.netlify.app'
+            'https://thegame101.netlify.app',
+            'https://samjaberi.dev/'
         ]
         const githubs = [
             'https://github.com/samnjab/euphonia3',
             'https://github.com/samnjab/Acrolix',
-            'https://github.com/samnjab/theGame'
+            'https://github.com/samnjab/theGame',
+            'https://github.com/samnjab/new-portfolio'
         ]
-        const videoSrcs = [vid1, vid2, vid3]
-        const coverSrcs = [cover1, cover2, cover3]
-        const bwCovers = [bwCover1, bwCover2, bwCover3]
-        const titleColors = [['#e0afa0', '#f4f3ee', '#bcb8b1', '#8a817c', '#463f3a'], ['#177e89', '#efe6dd', '#f3dfa2', '#bb4430', '#231f20'], ['#01497c', '#01497c', '#014f86', '#2a6f97', '#468faf', '#61a5c2', '#89c2d9', '#a9d6e5']]
+        const videoSrcs = [vid1, vid2, vid3, vid4]
+        const coverSrcs = [cover1, cover2, cover3, cover4]
+        const bwCovers = [bwCover1, bwCover2, bwCover3, bwCover4]
+        const titleColors = [['#e0afa0', '#f4f3ee', '#bcb8b1', '#8a817c', '#463f3a'], ['#177e89', '#efe6dd', '#f3dfa2', '#bb4430', '#231f20'], ['#fffcf2', '#ccc5b9', '#403d39', '#252422', '#eb5e28'], ['#6b705c', '#ddbea9', '#ffe8d6', '#b7b7a4', '#a5a58d', '#6b705c']]
         setProjects(
             titles.map((title, i) => {
                 let project = new Project(title, descriptions[i], liveLinks[i], githubs[i], videoSrcs[i], coverSrcs[i], bwCovers[i], titleColors[i])
@@ -97,19 +102,19 @@ export default function Projects({ campaignMode, setCampaignMode }) {
             track.dataset.mouseDownAt = '0'
             track.dataset.prevPercentage = track.dataset.percentage
         }
-
         const section = document.querySelector('.projects')
         section.onscroll = (e) => {
             const scrollDelta = parseFloat(track.dataset.prevScroll) - e.target.scrollLeft
-            const maxScrollDelta = track.offsetWidth / 6 
-            const percentage = 2 * (scrollDelta / maxScrollDelta) * 100
+            const maxScrollDelta = window.innerWidth 
+            const percentage = (scrollDelta / maxScrollDelta) * 100
             const nextPercentageUnconstrained = parseFloat(track.dataset.percentScroll) + percentage
             const nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100)
             track.dataset.percentScroll = nextPercentage
             track.dataset.prevScroll = e.target.scrollLeft 
-            track.animate({
-                transform: `translate(${nextPercentage}%, -50%)`
-            }, { duration: 1200, fill: "forwards" })
+            console.log('percentscroll', nextPercentage)
+            // track.animate({
+            //     transform: `translate(${nextPercentage}%, -50%)`
+            // }, { duration: 1200, fill: "forwards" })
             for(const image of track.getElementsByClassName('image')) {
                 image.animate({
                 objectPosition: `${(100 + nextPercentage)}% center`
@@ -137,33 +142,31 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         const projectDiv = document.querySelector('.projects')
         const projectTrack = document.getElementById('projectTrack')
         const index = projects.indexOf(fullview)
-        console.log('index is', index)
-        console.log('dataset scroll', projectTrack.dataset.percentScroll)
         projectTrack.animate({
-                transform: `translate(${-1 * projectTrack.dataset.percentScroll}, -50%)`
-            }, { duration: 0 , fill: "forwards" })
-        projectDiv.scrollLeft =  0.5 * document.body.clientWidth - 0.14 * document.body.clientWidth + index * (document.body.clientWidth - 0.14 * document.body.clientWidth)
-        // console.log('scroll width', (projectTrack.scrollWidth - document.body.clientWidth) / 2)
-        console.log('scroll left is ', projectDiv.scrollLeft)
+                transform: `translate(${-1 * projectTrack.dataset.prevScroll}, -50%)`
+            }, { duration: 1200 , fill: "forwards" })
+        projectDiv.scrollLeft =  0.5 * document.body.clientWidth - 0.16 * document.body.clientWidth + index * (document.body.clientWidth - 0.16 * document.body.clientWidth)
         trackXRef.current = projectDiv.scrollLeft
         projectDiv.onscroll = () => {
-            console.log('onscroll firing')
+            console.log('onscroll firing', trackXRef.current)
             setTrackPosition(projectDiv.scrollLeft)
             projectDiv.scrollLeft = trackXRef.current
+            projectTrack.animate({
+                transform: `translate(0%, -50%)`
+            }, { duration: 1200 , fill: "forwards" })
         }
     }, [fullview])
     useEffect(() => {
         if (trackPosition === 0) return
-        if (Math.abs(trackPosition - trackXRef.current) < 5 ) return
-        console.log('>2')
+        if (Math.abs(trackPosition - trackXRef.current) < 2 ) return
+        console.log('>5')
         setFullView()
         const projectTrack = document.querySelector('.projects')
         projectTrack.scrollLeft = 0
-        projectTrack.onscroll = () => {
-            console.log('2nd onscroll firing')
-            projectTrack.scrollLeft = 0
-        }
-        console.log('project track onscroll', projectTrack.onscroll)
+        // projectTrack.onscroll = () => {
+        //     console.log('2nd onscroll firing')
+        //     projectTrack.scrollLeft = 0
+        // }
     }, [trackPosition])
 
     const expand = (project) => {
@@ -202,7 +205,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                 <>
                     <div className='projects'>
                         <div id='expand'><p>+</p></div>
-                        <div id='projectTrack' data-mouse-down-at='0' data-prev-percentage='0' data-prev-scroll='0' data-percent-scroll='0'>
+                        <div id='projectTrack' className={`${fullview ? 'expanded' : ''}`} data-mouse-down-at='0' data-prev-percentage='0' data-prev-scroll='0' data-percent-scroll='0'>
                             { projects.map(project => {
                                 return (
                                     <div className={`window ${fullview === project ? 'rgbCover' : fullview ? 'fadedCover' :'bwCover'}`}>
