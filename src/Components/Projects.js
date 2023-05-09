@@ -64,6 +64,14 @@ export default function Projects({ campaignMode, setCampaignMode }) {
             })
         )
     },[])
+    useEffect(() => {
+        if (!campaignMode) return
+        const campaigns = document.querySelector('.campaignMain')
+        console.log('campaigns bounding', campaigns.getBoundingClientRect())
+        campaigns.onscoll = () => {
+            console.log('scrolling on campaigns', campaigns.scrollTop)
+        }
+    }, [campaignMode])
     const handleFocus = (project) => {
         const order = [...projects]
         for (let i=0;i < projects.indexOf(project); i++){
@@ -112,7 +120,6 @@ export default function Projects({ campaignMode, setCampaignMode }) {
             const nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100)
             track.dataset.percentScroll = nextPercentage
             track.dataset.prevScroll = e.target.scrollLeft 
-            console.log('percentscroll', nextPercentage)
             // track.animate({
             //     transform: `translate(${nextPercentage}%, -50%)`
             // }, { duration: 1200, fill: "forwards" })

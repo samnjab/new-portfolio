@@ -6,10 +6,11 @@ export default function Project({ project }) {
         // script.async = true
         // document.body.appendChild(script)
         // ScrollX to exit campaign view
-        
+        const projectContainer = document.getElementById(`${project.id}-campaignContainer`)
+        console.log('campaign bounding', projectContainer.getBoundingClientRect().top)
     }, [])
     return(
-        <div className='campaign-container'>
+        <div className='campaign-container' id={`${project.id}-campaignContainer`}>
             <div className='container'>
                 <video autoPlay={true} playsInline={false} loop={true} preload="auto" title={project.title} className="videoFullBleed">
                     <source src={project.vidSrc} type="video/mp4"/>

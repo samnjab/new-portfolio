@@ -363,6 +363,7 @@ p{
 }
 .campaignMain{
   height: 100vh;
+  /* overflow-y: scroll; */
 }
 .App-header .wrapper{
   display:flex;
@@ -543,8 +544,8 @@ nav a p{
 }
 .campaigns {
   position: relative;
-  max-width:100%;
-  overflow-x: scroll;
+  height:100%;
+  overflow: scroll;
 }
 
 .campaigns nav {
