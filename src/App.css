@@ -561,6 +561,9 @@ nav a p{
   max-width: 100%;
   overflow: hidden;
   background: rgb(42, 57, 88);
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .container::after{
   content:'';
@@ -586,20 +589,125 @@ nav a p{
   left: 50%;
   height: 644px;
 }
+/* project description */
 .content{
   display: block;
   position: absolute;
   margin:0 1rem;
-  inset: auto auto 2rem 7rem;
+  inset: auto auto 20rem 7rem;
   z-index:30;
   font-size:1rem;
 }
+/* pitch */
+.content p:nth-child(1){
+  font-size: 2rem;
+  font-family: var(--display-font);
+  color:var(--foregroundColor);
+  overflow: hidden;
+}
+.content p:nth-child(1) span{
+  display: inline-block;
+  min-width:1rem;
+  animation: animateOpenUpFade 1200ms ease-in-out;
+  transform:translate(0%, 0%);
+}
+.light .content p,
+.light a.content{
+  color:var(--foregroundColorMix8);
+}
+
+/* Project Repo Link */
 .content:nth-child(2){
-  inset:auto auto 2rem 2rem;
+  inset:auto auto 2rem 7rem;
+}
+/* project live link */
+.content:nth-child(3){
+  inset: auto auto 2rem 2rem;
 }
 .title{
   bottom:10%;
   left:0;
+}
+/*Text Animation KeyFrames */
+@keyframes animateOpenUp {
+  0% {
+    transform: translateY(120%)
+  }
+  to {
+    transform: translate(0)
+  }
+}
+
+@keyframes animateOpenUpFade {
+  0% {
+    transform: translateY(120%);
+    opacity: 0;
+    visibility: hidden;
+  }
+  1% {
+    transform: translateY(120%);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    transform: translate(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@keyframes animateCloseUp {
+  0% {
+    transform: translate(0)
+  }
+  to {
+    transform: translateY(-120%)
+  }
+}
+@keyframes animateCloseUpFade {
+  0% {
+    transform: translate(0);
+    opacity: 1;
+    visibility: visible
+  }
+
+  99% {
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: visible
+  }
+  to {
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden
+  }
+}
+@keyframes animateCloseDown {
+  0% {
+    transform: translate(0)
+  }
+  to {
+    transform: translateY(120%)
+  }
+}
+
+@keyframes animateCloseDownFade {
+  0% {
+    transform: translate(0);
+    opacity: 1;
+    visibility: visible
+  }
+
+  99% {
+    transform: translateY(120%);
+    opacity: 0;
+    visibility: visible
+  }
+
+  to {
+    transform: translateY(120%);
+    opacity: 0;
+    visibility: hidden
+  }
 }
 /* End of Campaign Styles */
 /* Project Preview Styles */
