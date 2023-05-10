@@ -14,13 +14,25 @@ export default function Project({ project, y }) {
     }, [y])
     useEffect(() => {
         if (!fadeIn) return
-        console.log('animating', project.title)
-        document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content span').forEach(span => {
-            span.animate(
-            {animation:'animateOpenUpFade'},
-            { duration: 1200, fill: "forwards" }
-        )
-        })
+        const spanArray = document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content span.text')
+        const paragraphArray = document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content p.text span')
+        const animateText = async(spanArray) => {
+            for (let i=0; i < spanArray.length; i++){
+                await animate(spanArray[i], 100)
+            }
+            for (let i=0; i < paragraphArray.length; i++){
+                await animate(paragraphArray[i], 50)
+            }
+        }
+        const animate = (span, delay) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    span.classList.add('textAnimator')
+                    resolve()
+                }, delay)
+            }) 
+        }
+        animateText(spanArray)
     }, [fadeIn])
     return(
         <div className='campaign-container' id={`${project.id}-campaignContainer`}>
@@ -35,13 +47,24 @@ export default function Project({ project, y }) {
                         {
                             project.description.oneLiner.split(/(\s+)/).map(word => {
                                 return (
-                                    <span>{word}</span>
+                                    <>
+                                        {/* <span className='mask'>{word}</span> */}
+                                        <span className='text'>{word}</span>
+                                    </>
                                 )
                             })
                         }
                     </p>
-                    {/* <p>{project.description.oneLiner}</p> */}
-                    <p>{project.description.pitch}</p>
+                    <p className='text'>
+                        {
+                            project.description.pitch.split(/(\s+)/).map(word => {
+                                return(
+                                    <span>{word}</span>
+                                )
+
+                            })
+                        }
+                    </p>
                 </div>
             </div>
 
