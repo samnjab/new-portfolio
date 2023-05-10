@@ -20,6 +20,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     const [fullview,setFullView] = useState()
     const [trackPosition, setTrackPosition] = useState(0)
     const trackXRef = useRef(0)
+    const [y, setY]= useState(0)
 
     class Project{
         constructor(title, description, liveLink, github, vidSrc, coverSrc, bwCover, titleColors){
@@ -66,11 +67,10 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     },[])
     useEffect(() => {
         if (!campaignMode) return
-        const campaigns = document.querySelector('.campaignMain')
-        console.log('campaigns bounding', campaigns.getBoundingClientRect())
-        campaigns.onscoll = () => {
-            console.log('scrolling on campaigns', campaigns.scrollTop)
-        }
+        const campaigns = document.querySelector('.campaigns')
+        campaigns.addEventListener('scroll', () => {
+            setY(campaigns.scrollTop)
+        }, true)
     }, [campaignMode])
     const handleFocus = (project) => {
         const order = [...projects]
@@ -215,7 +215,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                 <div className='campaigns'>
                     {     
                     focus.map(project => {
-                        return <Campaign project={project} />
+                        return <Campaign project={project} y={y}/>
                     })
                     }
                 </div>

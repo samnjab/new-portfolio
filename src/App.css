@@ -363,7 +363,8 @@ p{
 }
 .campaignMain{
   height: 100vh;
-  /* overflow-y: scroll; */
+  position:relative;
+  overflow-y: scroll;
 }
 .App-header .wrapper{
   display:flex;
@@ -544,8 +545,10 @@ nav a p{
 }
 .campaigns {
   position: relative;
-  height:100%;
-  overflow: scroll;
+  max-height:100%;
+  overflow-y: scroll;
+  /* height:100%; */
+  overflow-x: scroll;
 }
 
 .campaigns nav {
@@ -609,7 +612,7 @@ nav a p{
 .content p:nth-child(1) span{
   display: inline-block;
   min-width:1rem;
-  animation: animateOpenUpFade 1200ms ease-in-out;
+  /* animation: animateOpenUpFade 1200ms ease-in-out; */
   transform:translate(0%, 0%);
 }
 .light .content p,
