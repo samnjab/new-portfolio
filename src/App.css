@@ -615,9 +615,9 @@ nav a p{
   transform:translate(0%, 0%);
   visibility: hidden;
 }
-/* .content>p.text{
-  visibility: hidden;
-} */
+.content>p.text{
+  overflow: hidden;
+}
 .content>p.text span{
   display: inline-block;
   min-width:7px;
@@ -662,15 +662,10 @@ nav a p{
     opacity: 0;
     visibility: hidden;
   }
-  /* 1% {
+  1% {
     transform: translateY(120%);
     opacity: 0;
     visibility: visible;
-  } */
-  1%{
-    transform: translateY(120%);
-    opacity: 0.3;
-    visibility: hidden;
   }
   to {
     transform: translate(0);
