@@ -73,7 +73,7 @@ function App() {
                   </nav>
               </div>
             </header>
-            <section className={`main ${campaignMode ? 'campaignMain' : ''}`}>
+            <section className={`main ${campaignMode ? 'campaignMain' : ''} ${!mode ? 'aboutMain': '' }`}>
               {
                 mode ?
                 <Projects mode={mode} setCampaignMode={setCampaignMode} campaignMode={campaignMode}/>

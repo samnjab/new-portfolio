@@ -38,9 +38,9 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     useEffect(() => {
         const titles = ['Euphonia', 'Acrolix', 'The Game', "Sam's Portfolio"]
         const descriptions = [
-            {oneLiner:'Find your next favourite tune.' ,pitch:"Do you like the sweet sound of synthesizers? Does electronic music make your heart sing? Are you in love? Are you heartbroken? Checkout Euphonia."}
-            ,{oneLiner:'Chaotic Word Play', pitch: "Whether you're looking for a catchy name for your business, a memorable slogan for your brand, or just a fun way to play with words, Acrolix is the perfect tool. With a sleek interface, you can start generating creative backronyms in just a few taps."}
-           ,{oneLiner:'Come watch The Game with us.', pitch:'Follow the stats of your favourite FIFA team on The Game.'}, {oneLiner:'Buttery Smooth Motion Development', pitch:'Curious how this porfolio was built? Check out the code.'}
+            {oneLiner:'Find your next favourite tune.' ,pitch:"Do you like the sweet sound of synthesizers? Does electronic music make your heart sing?/Are you in love? Are you heartbroken?/Checkout Euphonia."}
+            ,{oneLiner:'Chaotic Word Play.', pitch: "Looking for a catchy name for your business? a memorable slogan for your brand?/Acrolix is the perfect tool./Play with creative backronyms with a fun sleek interface in just a few taps."}
+           ,{oneLiner:'Come watch The Game with us.', pitch:'Follow the stats of your favourite FIFA team on The Game.'}, {oneLiner:'Buttery Smooth Motion Development.', pitch:'Curious how this porfolio was built?/Check out the code.'}
         ]
         const liveLinks =[
             'https://euphonia3.vercel.app/',

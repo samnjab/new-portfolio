@@ -15,13 +15,14 @@ export default function Project({ project, y }) {
     useEffect(() => {
         if (!fadeIn) return
         const spanArray = document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content span.text')
-        const paragraphArray = document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content p.text span')
+        const paragraphArray = document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content .sentence span')
+        console.log(paragraphArray)
         const animateText = async(spanArray) => {
             for (let i=0; i < spanArray.length; i++){
                 await animate(spanArray[i], 100)
             }
             for (let i=0; i < paragraphArray.length; i++){
-                await animate(paragraphArray[i], 50)
+                await animate(paragraphArray[i], 100)
             }
         }
         const animate = (span, delay) => {
@@ -48,23 +49,23 @@ export default function Project({ project, y }) {
                             project.description.oneLiner.split(/(\s+)/).map(word => {
                                 return (
                                     <>
-                                        {/* <span className='mask'>{word}</span> */}
                                         <span className='text'>{word}</span>
                                     </>
                                 )
                             })
                         }
                     </p>
-                    <p className='text'>
+                    <div className='pitch'>
                         {
-                            project.description.pitch.split(/(\s+)/).map(word => {
-                                return(
-                                    <span>{word}</span>
+                            project.description.pitch.split(/\/+/).map(sentence => {
+                                return (
+                                <p className='sentence'>
+                                    <span>{sentence}</span>
+                                </p>
                                 )
-
                             })
                         }
-                    </p>
+                    </div>
                 </div>
             </div>
 

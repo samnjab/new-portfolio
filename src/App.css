@@ -366,6 +366,9 @@ p{
   position:relative;
   overflow-y: scroll;
 }
+.aboutMain{
+  height: fit-content;
+}
 .App-header .wrapper{
   display:flex;
   justify-content: space-between;
@@ -598,7 +601,7 @@ nav a p{
   display: block;
   position: absolute;
   margin:0 1rem;
-  inset: auto auto 20rem 7rem;
+  inset: auto auto 15rem 7rem;
   z-index:30;
   font-size:1rem;
 }
@@ -615,10 +618,13 @@ nav a p{
   transform:translate(0%, 0%);
   visibility: hidden;
 }
-.content>p.text{
+
+.pitch>p.sentence{
   overflow: hidden;
+  margin:0;
+  padding:0;
 }
-.content>p.text span{
+.pitch>p.sentence span{
   display: inline-block;
   min-width:7px;
   transform:translate(0%, 0%);
