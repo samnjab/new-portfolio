@@ -120,9 +120,6 @@ export default function Projects({ campaignMode, setCampaignMode }) {
             const nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100)
             track.dataset.percentScroll = nextPercentage
             track.dataset.prevScroll = e.target.scrollLeft 
-            // track.animate({
-            //     transform: `translate(${nextPercentage}%, -50%)`
-            // }, { duration: 1200, fill: "forwards" })
             for(const image of track.getElementsByClassName('image')) {
                 image.animate({
                 objectPosition: `${(100 + nextPercentage)}% center`
@@ -140,7 +137,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         }
     }, [campaignMode, fullview])
     useEffect(() => {
-        if (x - xRef.current === 0) return
+        if (x - xRef.current < 2 && x - xRef.current > -2) return
         setCampaignMode(false)
         setFocus([])
         setFullView()
