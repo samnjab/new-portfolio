@@ -76,7 +76,7 @@ function App() {
             <section className={`main ${campaignMode ? 'campaignMain' : ''} ${!mode ? 'aboutMain': '' }`}>
               {
                 mode ?
-                <Projects mode={mode} setCampaignMode={setCampaignMode} campaignMode={campaignMode}/>
+                <Projects mode={mode} setCampaignMode={setCampaignMode} campaignMode={campaignMode} theme={theme} setTheme={setTheme}/>
                 :
                 <About mode={mode} setMode={setMode}/>
               }
@@ -92,8 +92,9 @@ function App() {
                           <p>Available Apr.2023</p>
                       </div>
                       <div className='contact'>
-                          <a href=''>Github</a>
-                          <a href=''>LinkedIn</a>
+                          <a href='https://github.com/samnjab'>Github</a>
+                          <a href='https://www.linkedin.com/in/sam-jaberi-310b92257/'>LinkedIn</a>
+                          <a href='https://medium.com/@samanjaberi.sj'>Medium</a>
                       </div>
                   </div>
               </footer>

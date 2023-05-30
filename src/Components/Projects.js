@@ -12,7 +12,7 @@ import bwCover1 from '../assets/euphonia2.JPG'
 import bwCover2 from '../assets/typewriter2.JPG'
 import bwCover3 from '../assets/thegame2.JPG'
 import bwCover4 from '../assets/portfolio2.JPG'
-export default function Projects({ campaignMode, setCampaignMode }) {
+export default function Projects({ campaignMode, setCampaignMode, theme, setTheme }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
     const [x, setX] = useState(0)
@@ -21,6 +21,7 @@ export default function Projects({ campaignMode, setCampaignMode }) {
     const [trackPosition, setTrackPosition] = useState(0)
     const trackXRef = useRef(0)
     const [y, setY]= useState(0)
+    const themeMem = useRef(theme)
 
     class Project{
         constructor(title, description, liveLink, github, vidSrc, coverSrc, bwCover, titleColors){
@@ -143,7 +144,13 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         setFullView()
     }, [x])
     useEffect(() => {
-        if (campaignMode || !fullview) return
+        if (campaignMode) return
+        if (!fullview){
+            setTheme(themeMem.current)
+            return
+        }
+        console.log('theme is', theme)
+        themeMem.current === 'light' ? setTheme('dark') : setTheme('light')
         const projectDiv = document.querySelector('.projects')
         const projectTrack = document.getElementById('projectTrack')
         const index = projects.indexOf(fullview)
@@ -153,13 +160,16 @@ export default function Projects({ campaignMode, setCampaignMode }) {
         projectDiv.scrollLeft =  0.5 * document.body.clientWidth - 0.16 * document.body.clientWidth + index * (document.body.clientWidth - 0.16 * document.body.clientWidth)
         trackXRef.current = projectDiv.scrollLeft
         projectDiv.onscroll = () => {
-            console.log('onscroll firing', trackXRef.current)
             setTrackPosition(projectDiv.scrollLeft)
             projectDiv.scrollLeft = trackXRef.current
             projectTrack.animate({
                 transform: `translate(0%, -50%)`
             }, { duration: 1200 , fill: "forwards" })
         }
+        const inFullView = document.getElementById(fullview.id)
+        inFullView.querySelectorAll('h3').forEach(letter => {
+            letter.classList.add('textAnimator')
+        })
     }, [fullview])
     useEffect(() => {
         if (trackPosition === 0) return
@@ -233,7 +243,10 @@ export default function Projects({ campaignMode, setCampaignMode }) {
                                                 {
                                                     [...project.title].map(letter => {
                                                         return(
-                                                            <h3 style = {{color:project.titleColors[Math.floor(Math.random() * project.titleColors.length)]}} >{letter}</h3>
+                                                            <h3 
+                                                            style = {{color:project.titleColors[Math.floor(Math.random() * project.titleColors.length)]}} 
+                                                            // className={`${fullview === project ? 'textAnimator' : ''}`}
+                                                            >{letter}</h3>
                                                         )
                                                     })
                                                 }
