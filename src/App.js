@@ -68,7 +68,10 @@ function App() {
                   <nav>
                       <a 
                       className='nav'
-                      onClick={() => setMode(!mode)}
+                      onClick={() => {
+                        setMode(!mode)
+                        setTheme(themeMem.current)
+                      }}
                       >
                           {
                           mode ?

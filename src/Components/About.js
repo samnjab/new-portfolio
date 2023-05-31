@@ -13,6 +13,10 @@ export default function About({mode, setMode}) {
                         </div>
                         <div className='skills'>
                             <h3>Tech Stack</h3>
+                            <p>Javascript & Interactive Design</p>
+                            <p>React</p>
+                            <p>NodeJs</p>
+                            <p>Python</p>
                         </div>
                         <div className='contact'>
                             <h3>Get In Touch</h3>
@@ -28,13 +32,9 @@ export default function About({mode, setMode}) {
                                 <button>Inquire</button>
                             </form>
                             </fieldset>
-                            <ul>
-                                <li><a href='https://github.com/samnjab' target='_blank'>Github</a></li>
-                                <li><a href='' target='_blank'>LinkedIn</a></li>
-                            </ul>
                         </div>
                     </section>
-                    <section className='aboutMain'>
+                    <section className='aboutMainSection'>
                         <div className='intro'>
                             <p>Sam is an Interactive Digital Creater based in Toronto. She specializes in creating visual experiences with a strong focus on interaction. </p> 
                             <p> Sam is of Persian and Turkish descent, and grew up in a small town near Tehran where she excelled at mathematics and computer science. She moved to Toronto at 17 to attend the University of Toronto where she majored in Neuroscience.</p>
@@ -44,6 +44,10 @@ export default function About({mode, setMode}) {
                         </div>
                         <div className='skills'>
                             <h3>Tech Stack</h3>
+                            <p>Javascript & Interactive Design</p>
+                            <p>React</p>
+                            <p>NodeJs</p>
+                            <p>Python</p>
                         </div>
                         <div className='contact'>
                             <h3>Get In Touch</h3>
@@ -59,10 +63,7 @@ export default function About({mode, setMode}) {
                                 <button>Inquire</button>
                             </form>
                             </fieldset>
-                            <ul>
-                                <li><a href='https://github.com/samnjab' target='_blank'>Github</a></li>
-                                <li><a href='' target='_blank'>LinkedIn</a></li>
-                            </ul>
+
                         </div>
                     </section>
                 </div>
