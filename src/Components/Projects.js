@@ -12,7 +12,7 @@ import bwCover1 from '../assets/euphonia2.JPG'
 import bwCover2 from '../assets/typewriter2.JPG'
 import bwCover3 from '../assets/thegame2.JPG'
 import bwCover4 from '../assets/portfolio2.JPG'
-export default function Projects({ campaignMode, setCampaignMode, theme, setTheme }) {
+export default function Projects({ campaignMode, setCampaignMode, theme, setTheme, themeMem }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
     const [x, setX] = useState(0)
@@ -21,8 +21,6 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
     const [trackPosition, setTrackPosition] = useState(0)
     const trackXRef = useRef(0)
     const [y, setY]= useState(0)
-    const themeMem = useRef(theme)
-
     class Project{
         constructor(title, description, liveLink, github, vidSrc, coverSrc, bwCover, titleColors){
             this.title = title
@@ -142,6 +140,7 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
         setCampaignMode(false)
         setFocus([])
         setFullView()
+        setTheme(themeMem.current)
     }, [x])
     useEffect(() => {
         if (campaignMode) return
@@ -150,6 +149,7 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
             return
         }
         console.log('theme is', theme)
+        console.log('themeMem is', themeMem.current)
         themeMem.current === 'light' ? setTheme('dark') : setTheme('light')
         const projectDiv = document.querySelector('.projects')
         const projectTrack = document.getElementById('projectTrack')

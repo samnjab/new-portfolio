@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Projects from './Components/Projects'
 import About from './Components/About'
 import './App.css'
@@ -7,6 +7,7 @@ function App() {
   const [mode, setMode] = useState(true)
   const [campaignMode, setCampaignMode] = useState(false)
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark')
+  const themeMem = useRef(theme)
   useEffect(() => {
     if (load < 101){
       let delay = Math.random()* 200
@@ -44,7 +45,10 @@ function App() {
                       theme === 'dark' ?
                       <button 
                       className='lightTheme'
-                      onClick={() => setTheme('light')}
+                      onClick={() => {
+                        setTheme('light')
+                        themeMem.current = 'light'
+                      }}
                       >
                       <div className="theSun">
                     </div>
@@ -52,7 +56,10 @@ function App() {
                       :
                       <button 
                       className='darkTheme'
-                      onClick={() => setTheme('dark')}
+                      onClick={() => {
+                        setTheme('dark')
+                        themeMem.current = 'dark'
+                      }}
                       >
                         <div className='moon'></div>
                       </button>
@@ -76,7 +83,7 @@ function App() {
             <section className={`main ${campaignMode ? 'campaignMain' : ''} ${!mode ? 'aboutMain': '' }`}>
               {
                 mode ?
-                <Projects mode={mode} setCampaignMode={setCampaignMode} campaignMode={campaignMode} theme={theme} setTheme={setTheme}/>
+                <Projects mode={mode} setCampaignMode={setCampaignMode} campaignMode={campaignMode} theme={theme} setTheme={setTheme} themeMem={themeMem}/>
                 :
                 <About mode={mode} setMode={setMode}/>
               }
