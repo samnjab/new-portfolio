@@ -1,17 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import Campaign from './Project'
-import cover1 from '../assets/euphonia.JPG'
-import cover2 from '../assets/typewriter.JPG'
-import cover3 from '../assets/thegame.jpeg'
-import cover4 from '../assets/portfolio.JPG'
+import card from './imageImporter'
+// import cover1 from '../assets/euphonia.jpg'
+// import cover2 from '../assets/typewriter.jpeg'
+// import cover3 from '../assets/thegame.jpeg'
+// import cover4 from '../assets/portfolio.JPG'
 import vid1 from '../assets/e3.mp4'
 import vid2 from '../assets/Acrolix.mp4'
 import vid3 from '../assets/Game.mp4'
 import vid4 from '../assets/portfolio.mp4'
-import bwCover1 from '../assets/euphonia2.JPG'
-import bwCover2 from '../assets/typewriter2.JPG'
-import bwCover3 from '../assets/thegame2.JPG'
-import bwCover4 from '../assets/portfolio2.JPG'
 export default function Projects({ campaignMode, setCampaignMode, theme, setTheme, themeMem }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
@@ -35,7 +32,7 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
         }
     }
     useEffect(() => {
-        const titles = ['Euphonia', 'Acrolix', 'The Game', "Sam's Portfolio"]
+        const titles = ['Euphonia', 'Acrolix', 'The Game', "Portfolio"]
         const descriptions = [
             {oneLiner:'Find your next favourite tune.' ,pitch:"Do you like the sweet sound of synthesizers? Does electronic music make your heart sing?/Are you in love? Are you heartbroken?/Checkout Euphonia."}
             ,{oneLiner:'Chaotic Word Play.', pitch: "Looking for a catchy name for your business? a memorable slogan for your brand?/Acrolix is the perfect tool./Play with creative backronyms with a fun sleek interface in just a few taps."}
@@ -54,12 +51,18 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
             'https://github.com/samnjab/new-portfolio'
         ]
         const videoSrcs = [vid1, vid2, vid3, vid4]
-        const coverSrcs = [cover1, cover2, cover3, cover4]
-        const bwCovers = [bwCover1, bwCover2, bwCover3, bwCover4]
+        const coverSrcs = 
+        { 
+            'euphonia': [card('euphonia', 1), card('euphonia', 2)],
+            'acrolix': [card('acrolix', 1), card('acrolix', 2)], 
+            'thegame': [card('thegame', 1), card('thegame', 2)], 
+            'porttfolio': [card('portfolio', 1), card('portfolio', 2)]
+        }
         const titleColors = [['#e0afa0', '#f4f3ee', '#bcb8b1', '#8a817c', '#463f3a'], ['#177e89', '#efe6dd', '#f3dfa2', '#bb4430', '#231f20'], ['#fffcf2', '#ccc5b9', '#403d39', '#252422', '#eb5e28'], ['#6b705c', '#ddbea9', '#ffe8d6', '#b7b7a4', '#a5a58d', '#6b705c']]
         setProjects(
             titles.map((title, i) => {
-                let project = new Project(title, descriptions[i], liveLinks[i], githubs[i], videoSrcs[i], coverSrcs[i], bwCovers[i], titleColors[i])
+                console.log('title keys', title.toLowerCase().replace(' ', ''), 'covers', coverSrcs)
+                let project = new Project(title, descriptions[i], liveLinks[i], githubs[i], videoSrcs[i], coverSrcs[title.toLowerCase().replace(' ', '')][1], coverSrcs[title.toLowerCase().replace(' ', '')][2], titleColors[i])
                 return project
             })
         )
