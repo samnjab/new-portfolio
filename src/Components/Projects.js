@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Campaign from './Project'
-import card from './imageImporter'
+import { card, importAll } from './imageImporter'
 // import cover1 from '../assets/euphonia.jpg'
 // import cover2 from '../assets/typewriter.jpeg'
 // import cover3 from '../assets/thegame.jpeg'
@@ -51,18 +51,19 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
             'https://github.com/samnjab/new-portfolio'
         ]
         const videoSrcs = [vid1, vid2, vid3, vid4]
+        const images = importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/));
         const coverSrcs = 
         { 
-            'euphonia': [card('euphonia', 1), card('euphonia', 2)],
-            'acrolix': [card('acrolix', 1), card('acrolix', 2)], 
-            'thegame': [card('thegame', 1), card('thegame', 2)], 
-            'porttfolio': [card('portfolio', 1), card('portfolio', 2)]
+            'euphonia': [card('euphonia', 1, images), card('euphonia', 2, images)],
+            'acrolix': [card('acrolix', 1, images), card('acrolix', 2, images)], 
+            'thegame': [card('thegame', 1, images), card('thegame', 2, images)], 
+            'portfolio': [card('portfolio', 1, images), card('portfolio', 2, images)]
         }
         const titleColors = [['#e0afa0', '#f4f3ee', '#bcb8b1', '#8a817c', '#463f3a'], ['#177e89', '#efe6dd', '#f3dfa2', '#bb4430', '#231f20'], ['#fffcf2', '#ccc5b9', '#403d39', '#252422', '#eb5e28'], ['#6b705c', '#ddbea9', '#ffe8d6', '#b7b7a4', '#a5a58d', '#6b705c']]
         setProjects(
             titles.map((title, i) => {
                 console.log('title keys', title.toLowerCase().replace(' ', ''), 'covers', coverSrcs)
-                let project = new Project(title, descriptions[i], liveLinks[i], githubs[i], videoSrcs[i], coverSrcs[title.toLowerCase().replace(' ', '')][1], coverSrcs[title.toLowerCase().replace(' ', '')][2], titleColors[i])
+                let project = new Project(title, descriptions[i], liveLinks[i], githubs[i], videoSrcs[i], coverSrcs[title.toLowerCase().replace(' ', '')][0], coverSrcs[title.toLowerCase().replace(' ', '')][1], titleColors[i])
                 return project
             })
         )
@@ -255,6 +256,7 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
                                                 }
                                             </div>
                                             <div className='img-box'>
+                                                {console.log('rgb cover', project.coverSrc, 'bwCover', project.bwCover)}
                                                     <img 
                                                     src={project.coverSrc} 
                                                     className={`image ${fullview === project ? '' : 'hide'}`} 
