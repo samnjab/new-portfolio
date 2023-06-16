@@ -3,7 +3,7 @@ export default function About({mode, setMode}) {
         <div className='about'>
             <div className='body'>
                 <div className='wrapper'>
-                    <section className='shadow'>
+                    <div className='shadow aboutSection'>
                         <div className='intro'>
                             <p>Sam is an Interactive Digital Creater based in Toronto. She specializes in creating visual experiences with a strong focus on interaction. </p> 
                             <p> Sam is of Persian and Turkish descent, and grew up in a small town near Tehran where she excelled at mathematics and computer science. She moved to Toronto at 17 to attend the University of Toronto where she majored in Neuroscience.</p>
@@ -33,8 +33,8 @@ export default function About({mode, setMode}) {
                             </form>
                             </fieldset>
                         </div>
-                    </section>
-                    <section className='aboutMainSection'>
+                    </div>
+                    <div className='aboutMainSection aboutSection'>
                         <div className='intro'>
                             <p>Sam is an Interactive Digital Creater based in Toronto. She specializes in creating visual experiences with a strong focus on interaction. </p> 
                             <p> Sam is of Persian and Turkish descent, and grew up in a small town near Tehran where she excelled at mathematics and computer science. She moved to Toronto at 17 to attend the University of Toronto where she majored in Neuroscience.</p>
@@ -65,10 +65,9 @@ export default function About({mode, setMode}) {
                             </fieldset>
 
                         </div>
-                    </section>
+                    </div>
                 </div>
             </div>
-            
         </div>
     )
 

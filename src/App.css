@@ -50,6 +50,25 @@ html { box-sizing: border-box;}
   serif;
   --text-font: 'Source Serif Pro',
   'sans serif';
+  /* Motion Bezier Functions */
+  --i1: cubic-bezier(0.47, 0, 0.745, 0.715);
+  --o1: cubic-bezier(0.39, 0.575, 0.565, 1);
+  --io1: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  --i2: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --o2: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --io2: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --i3: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --o3: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --io3: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --i4: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --o4: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --io4: cubic-bezier(0.77, 0, 0.175, 1);
+  --i5: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  --o5: cubic-bezier(0.23, 1, 0.32, 1);
+  --io5: cubic-bezier(0.86, 0, 0.07, 1);
+  --i6: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --o6: cubic-bezier(0.19, 1, 0.22, 1);
+  --io6: cubic-bezier(1, 0, 0, 1);
 }
 /* Light theme */
 .light{
@@ -369,7 +388,8 @@ p{
   overflow-y: scroll;
 }
 .aboutMain{
-  height: fit-content;
+  height: 75vh;
+  overflow-y:scroll;
 }
 .App-header .wrapper{
   display:flex;
@@ -812,18 +832,45 @@ nav a p{
 }
 /* End of Project Preview Styles */
 /* About Page Styles */
+.about {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.body{
+  width: 100%;
+  min-height: 100vh;
+}
 .body .wrapper{
-  display:flex;
+  /* display:flex;
   flex-wrap:wrap;
-  justify-content: space-between;
+  justify-content: space-between; */
+}
+.aboutSection {
+  /* padding:4rem 0; */
 }
 .shadow{
-  font-size: 0.5rem;
-  flex-basis:30%;
-  transform: translateY(20%);
+  transform: translate(0%, 0%, 0%);
+  position: absolute;
+  top: 0;
+  padding-top: 15.3446vw;
+  left: calc(40px + 3.2813vw);
+  width: 9.6354vw;
+  font-size: .5409vw;
+  line-height: .7011vw;
+  letter-spacing: -.02em;
+  will-change: transform;
 }
 .aboutMainSection{
-  flex-basis:55%;
+  padding-left: calc(50%);
+  max-height:100%;
+  overflow-y: scroll;
+  width: 60.1042vw;
+  font-size: 2.5vw;
+  line-height: 3.6458vw;
+  letter-spacing: -.02em;
+  padding-bottom: 17.7083vw;
 }
 .aboutMainSection .contact p{
   font-style:italic;
