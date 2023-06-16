@@ -1,14 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Campaign from './Project'
 import { card, importAll } from './imageImporter'
-// import cover1 from '../assets/euphonia.jpg'
-// import cover2 from '../assets/typewriter.jpeg'
-// import cover3 from '../assets/thegame.jpeg'
-// import cover4 from '../assets/portfolio.JPG'
-import vid1 from '../assets/e3.mp4'
-import vid2 from '../assets/Acrolix.mp4'
-import vid3 from '../assets/Game.mp4'
-import vid4 from '../assets/portfolio.mp4'
 export default function Projects({ campaignMode, setCampaignMode, theme, setTheme, themeMem }) {
     const [projects, setProjects] = useState([])
     const [focus, setFocus] = useState([])
@@ -50,8 +42,14 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
             'https://github.com/samnjab/theGame',
             'https://github.com/samnjab/new-portfolio'
         ]
-        const videoSrcs = [vid1, vid2, vid3, vid4]
-        const images = importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/));
+        const videos = importAll(require.context('../assets', false, /\.(mp4)$/))
+        const videoSrcs = {
+            'euphonia': card('euphonia', 1, videos),
+            'acrolix': card('acrolix', 1, videos),
+            'thegame': card('thegame', 1, videos),
+            'portfolio': card('portfolio', 1, videos)
+        }
+        const images = importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/) );
         const coverSrcs = 
         { 
             'euphonia': [card('euphonia', 1, images), card('euphonia', 2, images)],
@@ -62,8 +60,7 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
         const titleColors = [['#e0afa0', '#f4f3ee', '#bcb8b1', '#8a817c', '#463f3a'], ['#177e89', '#efe6dd', '#f3dfa2', '#bb4430', '#231f20'], ['#fffcf2', '#ccc5b9', '#403d39', '#252422', '#eb5e28'], ['#6b705c', '#ddbea9', '#ffe8d6', '#b7b7a4', '#a5a58d', '#6b705c']]
         setProjects(
             titles.map((title, i) => {
-                console.log('title keys', title.toLowerCase().replace(' ', ''), 'covers', coverSrcs)
-                let project = new Project(title, descriptions[i], liveLinks[i], githubs[i], videoSrcs[i], coverSrcs[title.toLowerCase().replace(' ', '')][0], coverSrcs[title.toLowerCase().replace(' ', '')][1], titleColors[i])
+                let project = new Project(title, descriptions[i], liveLinks[i], githubs[i], videoSrcs[title.toLowerCase().replace(' ', '')], coverSrcs[title.toLowerCase().replace(' ', '')][0], coverSrcs[title.toLowerCase().replace(' ', '')][1], titleColors[i])
                 return project
             })
         )
@@ -152,8 +149,6 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
             setTheme(themeMem.current)
             return
         }
-        console.log('theme is', theme)
-        console.log('themeMem is', themeMem.current)
         themeMem.current === 'light' ? setTheme('dark') : setTheme('light')
         const projectDiv = document.querySelector('.projects')
         const projectTrack = document.getElementById('projectTrack')
@@ -178,7 +173,6 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
     useEffect(() => {
         if (trackPosition === 0) return
         if (Math.abs(trackPosition - trackXRef.current) < 2 ) return
-        console.log('>5')
         setFullView()
         const projectTrack = document.querySelector('.projects')
         projectTrack.scrollLeft = 0
@@ -256,7 +250,6 @@ export default function Projects({ campaignMode, setCampaignMode, theme, setThem
                                                 }
                                             </div>
                                             <div className='img-box'>
-                                                {console.log('rgb cover', project.coverSrc, 'bwCover', project.bwCover)}
                                                     <img 
                                                     src={project.coverSrc} 
                                                     className={`image ${fullview === project ? '' : 'hide'}`} 

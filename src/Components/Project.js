@@ -16,7 +16,6 @@ export default function Project({ project, y }) {
         if (!fadeIn) return
         const spanArray = document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content span.text')
         const paragraphArray = document.getElementById(`${project.id}-campaignContainer`).querySelectorAll('div.content .sentence span')
-        console.log(paragraphArray)
         const animateText = async(spanArray) => {
             for (let i=0; i < spanArray.length; i++){
                 await animate(spanArray[i], 100)

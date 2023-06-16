@@ -1,21 +1,17 @@
-function importAll(r) {
-	let images = {};
-  console.log('r is', r)
-  console.log('r keys', r.keys())
-  r.keys().forEach(item => { 
-      console.log('constructed keys from regex is', item.replace(/\.\/|.png/g, ''))
-      images[item.replace(/\.\/|.png/g, '')] = r(item)
+function importAll(context) {
+	let importedItems = {};
+  console.log('context keys', context.keys())
+  context.keys().forEach(item => {
+    importedItems[item.replace(/\.(png|jpe?g|jpg|svg|mp4)$|\.\//g, '')] = context(item)
     })
-  console.log('images returned by importAll', images)
-	return images
+  console.log('images returned by importAll', importedItems)
+	return importedItems
 }
 
-const card = (suit, number, images ) => {
-  console.log('suit and number', suit, number)
+const card = (suit, number=1, items ) => {
   const combo = (number) ? `${suit}${number}` : 'alternate';
-  console.log('combo is', combo)
   return (
-    images[`${combo}`]
+    items[`${combo}`]
   );
 }
 
