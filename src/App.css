@@ -94,6 +94,7 @@ html {
   color: var(--foregroundColor);
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  
 }
 *{
   -ms-overflow-style: none;
@@ -866,10 +867,7 @@ nav a p{
   height:100%;
   max-height: 100%;
 }
-.aboutSection {
-
-}
-.shadow{
+.a-s{
   position: absolute;
   top: 0;
   padding-top: 15.3446vw;
@@ -880,7 +878,7 @@ nav a p{
   letter-spacing: -.02em;
   will-change: transform;
 }
-.shadow p {
+.a-s p {
   font-size: .5409vw;
   line-height: .7011vw;
   letter-spacing: -.02em;
@@ -896,31 +894,43 @@ nav a p{
   will-change: opacity;
 }
 .scrollable {
-  height:100%;
-  max-height: 100%;
+  min-height:100vh;
+  height:calc(100vh + 1px);
   overflow-y: scroll;
 }
-.aboutMainSection{
+.a-m{
   padding-left: calc(50% - 64px);
-  width: 70.1042vw;
-  font-size: 2.8125vw;
+  width: 85%;
+  font-size: 2vw;
   line-height: 3.6458vw;
   letter-spacing: -.02em;
   padding-bottom: 17.7083vw;
 }
-.aboutMainSection .contact p{
+.a-m .a-se-cl:nth-child(3) p{
   font-style:italic;
   font-weight:100;
   font-size:0.9rem;
 
 }
+.a-m-cl{
+  padding-top: 14.5833vw;
+}
+.a-m-cl:first-child {
+  padding-top: 17.7083vw;
+}
+.a-s-cl{
+  padding-top: 2.8045vw;
+}
+.a-s-cl:first-child{
+  padding-top: 3.4054vw;
+}
 /* Tech Stack Styles */
-.aboutMainSection .skills p{
+.a-m .a-m-cl:nth-child(2) p{
   text-transform: uppercase;
   margin:0;
   font-size:0.9rem;
 }
-.skills p {
+.a-m-cl:nth-child(2) p {
   text-transform: uppercase;
   margin: 0;
 }
