@@ -2,14 +2,42 @@ import { useState, useEffect, useRef } from'react'
 export default function About({mode, setMode}) {
     const sectionRefs = [useRef(null), useRef(null), useRef(null)]
     const scrollBy = (e) => {
-        const target = e.target
-        console.log('scrolltop is', target.scrollTop)
-        const scrollDelta = parseFloat(target.dataset.prevScroll) - target.scrollTop
-        target.dataset.prevScroll = target.scrollTop
-        console.log('scroll amount is', scrollDelta)
-        target.animate({
-            transform: `translate3d(0px, ${scrollDelta * 5}px, 0px)`
-        }, { duration: 1200, fill: "forwards", easing:'ease-in' })
+        const parentDiv = document.querySelector('.a-m')
+        console.log('deltaY is', e.deltaY, 'parent div', parentDiv.dataset)
+        const newScrollPosition = e.deltaY + parseFloat(parentDiv.dataset.prevScroll)
+        console.log('new scroll position', newScrollPosition)
+        parentDiv.dataset.prevScroll = newScrollPosition
+        if (newScrollPosition < sectionRefs[0].current.clientHeight/2){
+            console.log('inside first if')
+            sectionRefs[0].current.animate({
+            transform: `translate3d(0px, ${-newScrollPosition}px, 0px)`
+            }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.52,.17,.49,.87)' })
+        }
+        else if (newScrollPosition> sectionRefs[0].current.clientHeight/2 && newScrollPosition < sectionRefs[0].current.clientHeight 
+        + sectionRefs[1].current.clientHeight/2){
+            console.log('inside 2nd if')
+            sectionRefs[0].current.animate({
+            transform: `translate3d(0px, ${-newScrollPosition}px, 0px)`
+            }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.52,.17,.49,.87)' })
+            sectionRefs[1].current.animate({
+            transform: `translate3d(0px, ${-newScrollPosition}px, 0px)`
+            }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.52,.17,.49,.87)' })
+        }
+        else if (newScrollPosition > sectionRefs[0].current.clientHeight + sectionRefs[1].current.clientHeight/2){
+            console.log('inside 3rd if')
+            sectionRefs[0].current.animate({
+                transform: `translate3d(0px, ${-newScrollPosition}px, 0px)`
+                }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.52,.17,.49,.87)' })
+            sectionRefs[1].current.animate({
+                transform: `translate3d(0px, ${-newScrollPosition}px, 0px)`
+                }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.52,.17,.49,.87)' })
+            sectionRefs[2].current.animate({
+                transform: `translate3d(0px, ${-newScrollPosition}px, 0px)`
+                }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.52,.17,.49,.87)' })
+        }
+        else if(newScrollPosition > sectionRefs[0].current.clientHeight + sectionRefs[1].current.clientHeight + sectionRefs[2].current.clientHeight){
+
+        }
     }
 
     return(
@@ -48,23 +76,23 @@ export default function About({mode, setMode}) {
                         </div>
                         <div className='scroller'></div>
                     </div>
-                    <div className='scrollable' onScroll= {(e) => scrollBy(e)} data-prev-scroll='0' data-prev-scroll-percent='0'>
-                        <div className='a-m'>
-                            <div id='a-m-intro' className='a-m-cl' ref={sectionRefs[0]}>
+                    <div className='scrollable' id='scrollable' onWheel= {(e) => scrollBy(e)}>
+                        <div className='a-m' data-prev-scroll = '0'>
+                            <div id='a-m-intro' className='a-m-cl' ref={sectionRefs[0]} style={{'transform':'translate3d(0px, 0px, 0px)'}}>
                                 <p>Sam is an Interactive Digital Creater based in Toronto. She specializes in creating visual experiences with a strong focus on interaction. </p> 
                                 <p> Sam is of Persian and Turkish descent, and grew up in a small town near Tehran where she excelled at mathematics and computer science. She moved to Toronto at 17 to attend the University of Toronto where she majored in Neuroscience.</p>
                                 <p>Aside from being a tech creator, Sam is a music fanatic, avid boxer and reader.</p>
                                 <p>Few things in life however, have topped her number one obsession: turning complex problems into elegant solutions.</p>
                                 <p>Sam is a graduate of Juno College of Technology (formerly HackerYou) Web Development Bootcamp. A unique combination of technical skills and a deep understanding of the human psychology drives her endless quest to uncover what makes us tick. </p> 
                             </div>
-                            <div id='a-m-skills' className='a-m-cl' ref={sectionRefs[1]}>
+                            <div id='a-m-skills' className='a-m-cl' ref={sectionRefs[1]} style={{'transform':'translate3d(0px, 0px, 0px)'}}>
                                 <h3>Tech Stack</h3>
                                 <p>Javascript & Interactive Design</p>
                                 <p>React</p>
                                 <p>NodeJs</p>
                                 <p>Python</p>
                             </div>
-                            <div id='a-m-contact' className='a-m-cl' ref={sectionRefs[2]}>
+                            <div id='a-m-contact' className='a-m-cl' ref={sectionRefs[2]} style={{'transform':'translate3d(0px, 0px, 0px)'}}>
                                 <h3>Get In Touch</h3>
                                 <p class="intro-text">Ready to work together on a design project? Want me on your team, or just want to say hello, how are ya? Fill out the form.</p>
                                 <fieldset>

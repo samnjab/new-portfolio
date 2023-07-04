@@ -895,8 +895,8 @@ nav a p{
 }
 .scrollable {
   min-height:100vh;
-  height:calc(100vh + 1px);
-  overflow-y: scroll;
+  max-height:500vh;
+  overflow-y: hidden;
 }
 .a-m{
   padding-left: calc(50% - 64px);
@@ -906,7 +906,19 @@ nav a p{
   letter-spacing: -.02em;
   padding-bottom: 17.7083vw;
 }
-.a-m .a-se-cl:nth-child(3) p{
+#a-m-intro{
+  transform: translate3d(0px, 0px, 0px);
+  will-change: transform;
+}
+#a-m-skills {
+  transform: translate3d(0px, 0px, 0px);
+  will-change: transform;
+}
+#a-m-contact {
+  transform: translate3d(0px, 0px, 0px);
+  will-change: transform;
+}
+.a-m .a-m-cl:nth-child(3) p{
   font-style:italic;
   font-weight:100;
   font-size:0.9rem;
