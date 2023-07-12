@@ -907,15 +907,12 @@ nav a p{
   padding-bottom: 17.7083vw;
 }
 #a-m-intro{
-  transform: translate3d(0px, 0px, 0px);
   will-change: transform;
 }
 #a-m-skills {
-  transform: translate3d(0px, 0px, 0px);
   will-change: transform;
 }
 #a-m-contact {
-  transform: translate3d(0px, 0px, 0px);
   will-change: transform;
 }
 .a-m .a-m-cl:nth-child(3) p{
