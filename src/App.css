@@ -905,21 +905,27 @@ nav a p{
   line-height: 3.6458vw;
   letter-spacing: -.02em;
   padding-bottom: 17.7083vw;
+  position:relative;
 }
 #a-m-intro{
   will-change: transform;
+  position:absolute;
+  top:0;
 }
 #a-m-skills {
   will-change: transform;
+  position:absolute;
+  top:100vh;
 }
 #a-m-contact {
   will-change: transform;
+  position:absolute;
+  top:100vh;
 }
 .a-m .a-m-cl:nth-child(3) p{
   font-style:italic;
   font-weight:100;
   font-size:0.9rem;
-
 }
 .a-m-cl{
   padding-top: 14.5833vw;

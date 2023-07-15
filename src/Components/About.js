@@ -1,29 +1,44 @@
 import { useState, useEffect, useRef } from'react'
 export default function About({mode, setMode}) {
     const sectionRefs = [useRef(null), useRef(null), useRef(null)]
+    useEffect(() => {
+        let product = true 
+        if (!(sectionRefs.map(sectionRef => {
+            return (product && sectionRef.current)
+        }))[sectionRefs.length - 1]) {
+            return 
+        }
+        sectionRefs.forEach(sectionRef => {
+            sectionRef.current.dataset.scrollPosition = sectionRef.current.offsetTop
+        })
+    }, [sectionRefs])
     const scrollBy = (e) => {
         const parentDiv = document.querySelector('.a-m')
-        parentDiv.dataset.globalScrollPosition = parseFloat(parentDiv.dataset.globalScrollPosition + e.delta.Y)
-        if (parentDiv.dataset.globalScrollPosition >= sectionRefs[0].current.clientHeight){
-            console.log('scrollposition increasing,')
-            if (sectionRefs[1].current.dataset.scrollPosition <= -parentDiv.clientHeight){
-                sectionRefs[0].current.dataset.scrollPosition = Math.max(Math.min(parseFloat(sectionRefs[0].current.dataset.scrollPosition) + e.deltaY, sectionRefs[0].current.clientHeight + 20), -(parentDiv.clientHeight))
-                console.log('deltaY is', e.deltaY, 'intro scroll position', sectionRefs[0].current.dataset.scrollPosition)
-            } else {
-                sectionRefs[1].current.dataset.scrollPosition = Math.max(Math.min(parseFloat(sectionRefs[1].current.dataset.scrollPosition) + e.deltaY, sectionRefs[1].current.clientHeight + sectionRefs[0].current.clientHeight), -(parentDiv.clientHeight))
-                console.log('skills scroll position', sectionRefs[1].current.dataset.scrollPosition)
-                sectionRefs[1].current.animate({
-                    transform: `translate3d(0px, ${-sectionRefs[1].current.dataset.scrollPosition}px, 0px)`
-                }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.56,.22,.47,.9)' })
-            }
-        } else if (parentDiv.dataset.globalScrollPosition < sectionRefs[0].current.clientHeight){
-            console.log('scrollposition increasing, havent reached intro max ')
-            sectionRefs[0].current.dataset.scrollPosition = Math.max(Math.min(parseFloat(sectionRefs[0].current.dataset.scrollPosition) + e.deltaY, sectionRefs[0].current.clientHeight), -(parentDiv.clientHeight))
-            console.log('deltaY is', e.deltaY, 'intro scroll position', sectionRefs[0].current.dataset.scrollPosition)
-            sectionRefs[0].current.animate({
-                transform: `translate3d(0px, ${-sectionRefs[0].current.dataset.scrollPosition}px, 0px)`
-            }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.56,.22,.47,.9)' })
-        }
+        console.log('intro', sectionRefs[0].current.dataset.scrollPosition)
+        console.log('skills', sectionRefs[1].current.dataset.scrollPosition)
+        console.log('contact', sectionRefs[2].current.dataset.scrollPosition)
+
+        // parentDiv.dataset.globalScrollPosition = parseFloat(parentDiv.dataset.globalScrollPosition + e.deltaY)
+        // if (parentDiv.dataset.globalScrollPosition >= sectionRefs[0].current.clientHeight){
+        //     console.log('scrollposition increasing,')
+        //     if (sectionRefs[1].current.dataset.scrollPosition <= -parentDiv.clientHeight){
+        //         sectionRefs[0].current.dataset.scrollPosition = Math.max(Math.min(parseFloat(sectionRefs[0].current.dataset.scrollPosition) + e.deltaY, sectionRefs[0].current.clientHeight + 20), -(parentDiv.clientHeight))
+        //         console.log('deltaY is', e.deltaY, 'intro scroll position', sectionRefs[0].current.dataset.scrollPosition)
+        //     } else {
+        //         sectionRefs[1].current.dataset.scrollPosition = Math.max(Math.min(parseFloat(sectionRefs[1].current.dataset.scrollPosition) + e.deltaY, sectionRefs[1].current.clientHeight + sectionRefs[0].current.clientHeight), -(parentDiv.clientHeight))
+        //         console.log('skills scroll position', sectionRefs[1].current.dataset.scrollPosition)
+        //         sectionRefs[1].current.animate({
+        //             transform: `translate3d(0px, ${-sectionRefs[1].current.dataset.scrollPosition}px, 0px)`
+        //         }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.56,.22,.47,.9)' })
+        //     }
+        // } else if (parentDiv.dataset.globalScrollPosition < sectionRefs[0].current.clientHeight){
+        //     console.log('scrollposition increasing, havent reached intro max ')
+        //     sectionRefs[0].current.dataset.scrollPosition = Math.max(Math.min(parseFloat(sectionRefs[0].current.dataset.scrollPosition) + e.deltaY, sectionRefs[0].current.clientHeight), -(parentDiv.clientHeight))
+        //     console.log('deltaY is', e.deltaY, 'intro scroll position', sectionRefs[0].current.dataset.scrollPosition)
+        //     sectionRefs[0].current.animate({
+        //         transform: `translate3d(0px, ${-sectionRefs[0].current.dataset.scrollPosition}px, 0px)`
+        //     }, { duration: 1200, fill: "forwards", easing:'cubic-bezier(.56,.22,.47,.9)' })
+        // }
 
         // let newScrollPosition = e.deltaY + parseFloat(parentDiv.dataset.prevScroll)
         // console.log('new scroll position', newScrollPosition)
